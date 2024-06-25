@@ -1,0 +1,148 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    // REMIXICONS
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css" crossorigin="")
+    // CSS
+    link(rel="stylesheet", type="text/css", href="/css/layout.css")
+    link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+    title DistribuMaster
+  body
+    //=============== HEADER ===============
+    header.header
+      .header__container.container
+        .header__toggle#header-toggle
+          i.ri-menu-line
+        a.header__logo(href="/")
+          img(src="/img/DistribuMaster_logo2.png", alt="")
+
+
+    //=============== SIDEBAR ===============
+    .sidebar#sidebar
+      nav.sidebar__container
+        .sidebar__logo
+          h3.sidebar__logo-text
+              span DistribuMaster
+        .sidebar__content
+          .sidebar__list
+            a.sidebar__link.active-link(href="/")
+              i.ri-home-5-line
+              span.sidebar__link-name Inicio
+              span.sidebar__link-floating Inicio
+
+            a.sidebar__link(href="/playlists")
+              i.ri-bar-chart-fill
+              span.sidebar__link-name Distribuc. discretas
+              span.sidebar__link-floating discretas
+
+            a.sidebar__link(href="/musica")
+              i.ri-line-chart-fill
+              span.sidebar__link-name Distribuc. continuas
+              span.sidebar__link-floating continuas
+
+            a.sidebar__link(href="/buscar")
+              i.ri-alert-line
+              span.sidebar__link-name Valores críticos
+              span.sidebar__link-floating Valores críticos
+
+          h3.sidebar__title
+            span Prob.
+          .sidebar__list
+            a.sidebar__link(href="/albumes")
+              i.ri-focus-3-line
+              span.sidebar__link-name Probabilidad puntual
+              span.sidebar__link-floating Probabilidad puntual
+
+            a.sidebar__link(href="/favoritas")
+              i.ri-stack-line
+              span.sidebar__link-name Probabilidad acumulada
+              span.sidebar__link-floating Probabilidad acumulada
+            
+            a.sidebar__link(href="/favoritas")
+              i.ri-line-height
+              span.sidebar__link-name Probabilidad de intervalo
+              span.sidebar__link-floating Probabilidad de intervalo
+
+          h3.sidebar__title
+            span General
+          .sidebar__list
+            a.sidebar__link(href="/logout")
+              i.ri-logout-box-r-line
+              span.sidebar__link-name Logout
+              span.sidebar__link-floating Logout
+            
+            a.sidebar__link(href="#", id="mode-toggle-button")
+              i#mode-icon.ri-moon-line
+              span.sidebar__link-name#mode-text DarkMode
+              span.sidebar__link-floating#mode-text-floating DarkMode
+
+
+        .sidebar__account
+          img.sidebar__perfil(src="/img/avatar-default.png", alt="sidebar image")
+          .sidebar__names
+            h3.sidebar__name 
+            span.sidebar__email Eliam2102
+          a.sidebar__link(href="/user-info")
+            i.ri-arrow-right-s-line
+
+  main.main.container#main
+      block content
+
+  script.
+    const showSidebar = (toggleId, sidebarId, mainId) => {
+      const toggle = document.getElementById(toggleId),
+            sidebar = document.getElementById(sidebarId),
+            main = document.getElementById(mainId);
+
+      if (toggle && sidebar && main) {
+        toggle.addEventListener('click', () => {
+          /* Mostrar la barra lateral */
+          sidebar.classList.toggle('show-sidebar');
+          /* Agregar padding al elemento principal */
+          main.classList.toggle('main-pd');
+        });
+      }
+    };
+
+    //- Función para cambiar el modo
+    const toggleDarkMode = () => {
+      const body = document.body;
+      const modeIcon = document.getElementById('mode-icon');
+      const modeText = document.getElementById('mode-text');
+      const modeTextFloating = document.getElementById('mode-text-floating');
+
+      body.classList.toggle('dark-mode');
+
+      if (body.classList.contains('dark-mode')) {
+        modeIcon.classList.remove('ri-moon-line');
+        modeIcon.classList.add('ri-sun-line');
+        modeText.textContent = 'Light Mode';
+        modeTextFloating.textContent = 'Light Mode';
+      } else {
+        modeIcon.classList.remove('ri-sun-line');
+        modeIcon.classList.add('ri-moon-line');
+        modeText.textContent = 'Dark Mode';
+        modeTextFloating.textContent = 'Dark Mode';
+      }
+    };
+
+    //- Mostrar la barra lateral
+    showSidebar('header-toggle', 'sidebar', 'main');
+
+    //- Cambiar el color del enlace activo
+      const sidebarLink = document.querySelectorAll('.sidebar__link');
+
+      function linkColor() {
+        sidebarLink.forEach(l => l.classList.remove('active-link'));
+        this.classList.add('active-link');
+      }
+
+      sidebarLink.forEach(l => l.addEventListener('click', linkColor));
+
+      //- Evento para cambiar el modo
+      document.getElementById('mode-toggle-button').addEventListener('click', function(event) {
+        event.preventDefault();  // Evita que la página se recargue al hacer clic en el enlace
+        toggleDarkMode();
+      });

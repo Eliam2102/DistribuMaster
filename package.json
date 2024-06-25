@@ -1,0 +1,28 @@
+{
+  "name": "distribumaster",
+  "version": "1.0.0",
+  "description": "DistribuMaster es una herramienta versátil y fácil de usar diseñada para estudiantes, investigadores y profesionales que necesitan calcular probabilidades, valores críticos y otras métricas relevantes para una variedad de distribuciones de probabilidad comunes.",
+  "main": "server.js",
+  "scripts": {
+    "sass": "sass styles/sass/styles.sass:public/css/styles.css",
+    "forms": "sass styles/sass/forms.sass:public/css/forms.css",
+    "index": "sass styles/sass/index.sass:public/css/index.css",
+    "layout": "sass styles/sass/layout.sass:public/css/layout.css",
+    "sass-watch": "sass --watch styles/sass:public/css",
+    "start": "npm run sass && npm run index && npm run layout && npm run forms && node server.js"
+  },
+  "keywords": [],
+  "author": "Eliam Jesus Cauich Villanueva",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "jstat": "^1.9.6",
+    "mathjs": "^13.0.0",
+    "pug": "^3.0.3",
+    "remixicon": "^4.2.0",
+    "sass": "^1.77.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

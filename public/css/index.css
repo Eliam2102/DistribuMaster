@@ -1,0 +1,102 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1em 0;
+  padding: 1em;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+h2 i {
+  margin-right: 0.5em;
+}
+
+p {
+  font-size: 1em;
+  color: #666;
+}
+
+a.btn {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+a.btn:hover {
+  background-color: #6366F1;
+}
+
+footer {
+  background-color: #374151;
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-links {
+  margin-top: 1em;
+}
+
+.social-links a {
+  color: white;
+  margin: 0 0.5em;
+  font-size: 1.5em;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #6366F1;
+}
+
+/*# sourceMappingURL=index.css.map */

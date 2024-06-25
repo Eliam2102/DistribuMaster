@@ -1,0 +1,71 @@
+extends layout
+
+block content
+    head
+        link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/index.css")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title DistribuMaster
+    body
+        header
+            h1 Bienvenidos a DistribuMaster
+            p En DistribuMaster, ofrecemos una potente calculadora estadística que te permite realizar cálculos y análisis sobre diversas distribuciones y probabilidades. Nuestra herramienta es ideal para estudiantes, profesores y profesionales que necesitan realizar cálculos precisos y rápidos en el ámbito de la estadística. Aquí puedes calcular probabilidades puntuales, acumuladas, intervalos de confianza y encontrar valores críticos para tus distribuciones.
+
+        main
+            img(src="/img/graph2.gif", alt="")
+            section.card
+                i.ri-home-5-line.icon
+                h2 Inicio
+                p Aquí encontrarás la introducción a nuestro sitio.
+                a.btn(href="/") Ver más
+
+            section.card
+                i.ri-bar-chart-fill.icon
+                h2 Distribuciones Discretas
+                p Calcula probabilidades para distribuciones discretas, como la binomial y la de Poisson.
+                a.btn(href="/playlists") Ver más
+
+            section.card
+                i.ri-line-chart-fill.icon
+                h2 Distribuciones Continuas
+                p Calcula probabilidades para distribuciones continuas, como la normal y la t de Student.
+                a.btn(href="/musica") Ver más
+
+            section.card
+                i.ri-alert-line.icon
+                h2 Valores Críticos
+                p Encuentra valores críticos para tus distribuciones, esenciales para pruebas de hipótesis y otros análisis.
+                a.btn(href="/buscar") Ver más
+
+            section.card
+                i.ri-focus-3-line.icon
+                h2 Probabilidad Puntual
+                p Calcula la probabilidad puntual de un evento específico dentro de una distribución.
+                a.btn(href="/albumes") Ver más
+
+            section.card
+                i.ri-stack-line.icon
+                h2 Probabilidad Acumulada
+                p Calcula la probabilidad acumulada hasta un cierto punto en una distribución.
+                a.btn(href="/favoritas") Ver más
+
+            section.card
+                i.ri-line-height.icon
+                h2 Probabilidad de Intervalo
+                p Calcula la probabilidad de que un evento caiga dentro de un intervalo específico.
+                a.btn(href="/favoritas") Ver más
+
+        footer
+            .footer-content
+                p &copy; 2024 DistribuMaster. Todos los derechos reservados.
+                .social-links
+                    a(href="https://facebook.com")
+                        i.ri-facebook-circle-fill
+                    a(href="https://twitter.com")
+                        i.ri-twitter-fill
+                    a(href="https://linkedin.com")
+                        i.ri-linkedin-box-fill
+                    a(href="https://github.com")
+                        i.ri-github-fill

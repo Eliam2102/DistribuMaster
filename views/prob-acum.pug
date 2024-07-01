@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Probabilidad Acumulada
+        link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", rel="stylesheet")
+        link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+        link(rel="stylesheet", href="/css/distribuciones-styles.css")
+    body
+        .container
+            // Barra de navegación para cambiar de slide
+            .slide-nav
+                h1 Calcúla la probabilidad acumulada
+            // Contenedor de las slides
+            .slides
+                // Slide Probabilidad Acumulada
+                .slide#acumulada
+                    h2 Probabilidad Acumulada
+                    p Calcular la probabilidad de que una variable aleatoria sea menor o igual a un valor dado.
+                    form
+                        label(for="valor") Valor:
+                        input(type="number" id="valor" name="valor" required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+        
+        // Script para cambiar de slide
+    script.
+        document.querySelectorAll('.slide-nav button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.slide').forEach(slide => {
+                    slide.style.display = 'none';
+                });
+                document.getElementById(button.getAttribute('data-slide')).style.display = 'block';
+                // Añadir y quitar la clase active para el botón seleccionado
+                document.querySelectorAll('.slide-nav button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+        document.getElementById('acumulada').style.display = 'block'; // Mostrar la primera slide por defecto
+        document.querySelector('.slide-nav button[data-slide="acumulada"]').classList.add('active'); // Marcar el primer botón como activo

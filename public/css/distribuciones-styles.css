@@ -1,0 +1,168 @@
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0 10px !important;
+}
+
+.slide-nav {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.slide-nav button {
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+.slide-nav button:hover, .slide-nav button.active {
+  background-color: #4f52c1;
+}
+.slide-nav button::before {
+  font-size: 20px;
+  margin-right: 8px;
+}
+.slide-nav button::before i {
+  display: inline-block;
+}
+
+.slides .slide {
+  display: none;
+}
+.slides .slide.active {
+  display: block;
+}
+.slides .slide h2 {
+  margin-bottom: 10px;
+}
+.slides .slide p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.slides .slide form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.slides .slide form label {
+  font-weight: 600;
+}
+.slides .slide form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.slides .slide form button {
+  background-color: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.slides .slide form button:hover {
+  background-color: #4f52c1;
+}
+.slides .slide .export {
+  margin-top: 20px;
+  background-color: #ff6347;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s;
+}
+.slides .slide .export:hover {
+  background-color: #cc5138;
+}
+
+@media only screen and (max-width: 600px) {
+  .slide-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 1.5px;
+  }
+  .slide-nav button {
+    width: 48%;
+    height: 40px;
+    margin: 1.5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+  .slide-nav button::before {
+    font-size: 24px;
+    margin-right: 0;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  .slide-nav button:hover::after {
+    content: attr(title);
+    position: absolute;
+    background: #6366f1;
+    color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    transform: translateY(-100%);
+    z-index: 1;
+  }
+  .slide-nav .centered-button {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .slides .slide {
+    padding: 10px !important;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 10px !important;
+  }
+  .slides .slide h2, .slides .slide p, .slides .slide form {
+    font-size: 16px !important;
+  }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    padding: 15px;
+  }
+  .slide-nav button {
+    padding: 10px 15px;
+  }
+  .slides .slide {
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+  }
+  .slides .slide.active {
+    display: block !important;
+  }
+  form input, form button {
+    width: 100% !important;
+  }
+}
+
+/*# sourceMappingURL=distribuciones-styles.css.map */

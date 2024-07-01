@@ -1,14 +1,16 @@
 body
-    font-family: Arial, sans-serif
+    font-family: 'Loto', sans-serif
     margin: 0
     padding: 0
-    background-color: #ffff
+    background-color: #FCFEFC
 
 header
-    background-color: #4CAF50
-    color: white
+    background-color: none
+    color: black
     text-align: center
     padding: 1em 0
+    width: 100%
+    margin: 0
 
 h1
     margin: 0
@@ -22,24 +24,25 @@ section.card
     background-color: white
     border: 1px solid #ddd
     border-radius: 8px
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1)
-    margin: 1em 0
-    padding: 1em
-    width: 80%
-    max-width: 800px
-    position: relative
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+    margin: 1em 5px // Ajusta el margen lateral aquí
+    padding: 1.5em
+    width: calc(100% - 10px) // Calcula el ancho deseado
+    max-width: 100% // Asegura que ocupe todo el ancho disponible
+    transition: transform 0.3s, box-shadow 0.3s
+
+    &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+
 
 h2
-    font-size: 1.5em
+    font-size: 1.8em
     color: #333
-    display: flex
-    align-items: center
-
-h2 i
-    margin-right: 0.5em
+    margin-bottom: 0.5em
 
 p
-    font-size: 1em
+    font-size: 1.1em
     color: #666
 
 a.btn
@@ -50,13 +53,11 @@ a.btn
     color: white
     text-decoration: none
     border-radius: 4px
-    transition: background-color 0.3s
-    position: absolute
-    top: 1em
-    right: 1em
+    transition: background-color 0.3s, transform 0.3s
 
-a.btn:hover
-    background-color: #6366F1
+    &:hover
+        background-color: #45a049
+        transform: scale(1.05)
 
 footer
     background-color: #374151
@@ -75,11 +76,21 @@ footer
 .social-links
     margin-top: 1em
 
-.social-links a
-    color: white
-    margin: 0 0.5em
-    font-size: 1.5em
-    transition: color 0.3s
+    a
+        color: white
+        margin: 0 0.5em
+        font-size: 1.5em
+        transition: color 0.3s, transform 0.3s
 
-.social-links a:hover
-    color: #6366F1
+        &:hover
+            color: #45a049
+            transform: scale(1.2)
+
+@media screen and (max-width: 768px)
+    main
+        padding: 0.5em
+
+    section.card
+        width: calc(100% - 2em)
+        max-width: calc(100% - 2em)
+        margin: 0.5em

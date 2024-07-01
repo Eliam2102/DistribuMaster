@@ -1,43 +1,43 @@
 doctype html
-html(lang="en")
+html
     head
-        title Login
+        title Iniciar sesión
         meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap" rel="stylesheet")
-        script(src="https://kit.fontawesome.com/64d58efce2.js", crossorigin="anonymous")
+        meta(name="viewport", content="width=device-width, initial-scale=0.98")
         link(rel="icon", type="image/png", href="/img/favicon-chart.png")
-        link(rel="stylesheet", href="css/forms.css")
+        link(href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap" rel="stylesheet")
+        link(rel="stylesheet", href="/css/forms.css")
     body.login
-        .container
-            .info
-                h1 DistribuMaster
-                span Hecho con
-                i.fa.fa-heart
-                |  by
-                a(href="https://github.com/Eliam2102") Eliam Cauich
+        .login-container
+            h1.title #{title}
             .form
                 .thumbnail
                     img(src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/hat.svg')
+                if error
+                    p= error
                 form(action='/login' method='POST' class='login-form')
-                input(type='text', name='username', id='username', placeholder='Usuario (nombre)', required)
-                input(type='password' name='password' id='password' placeholder='Contraseña', required)
-                button(type='button' id='mostrarContrasena')
-                    i.material-symbols-rounded visibility_off
-                button(type='submit') login
-                p.message ¿Aún no tienes cuenta?
-                    a(href='/register') Regístrate
-    script.
-      const passwordInput = document.getElementById('password');
-      const mostrarContrasenaBtn = document.getElementById('mostrarContrasena');
-
-      mostrarContrasenaBtn.addEventListener('click', () => {
-        if (passwordInput.type === 'password') {
-          passwordInput.type = 'text';
-          mostrarContrasenaBtn.innerHTML = '<i class="material-symbols-rounded">visibility</i>';
-        } else {
-          passwordInput.type = 'password';
-          mostrarContrasenaBtn.innerHTML = '<i class="material-symbols-rounded">visibility_off</i>';
-        }
-      });
-
+                    .form-group
+                        label(for='username' class='form-label') Usuario
+                        input(type='text' name='username' id='username' placeholder='Usuario' class='form-input' required)
+                    .form-group
+                        label(for='password' class='form-label') Contraseña
+                        input(type='password' name='password' id='password' placeholder='Contraseña' class='form-input' required)
+                        button(type='button' id='mostrarContrasena')
+                            i.material-symbols-rounded visibility_off
+                    .form-group
+                        button(type='submit' class='submit-button') Iniciar sesión
+                p ¿No tienes una cuenta?
+                    a(href='/register' class='register-link') Regístrate
+        //- Script en línea para mostrar/ocultar contraseña
+        script.
+            const passwordInput = document.getElementById('password');
+            const mostrarContrasenaBtn = document.getElementById('mostrarContrasena');
+            mostrarContrasenaBtn.addEventListener('click', () => {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    mostrarContrasenaBtn.innerHTML = '<i class="material-symbols-rounded">visibility</i>';
+                } else {
+                    passwordInput.type = 'password';
+                    mostrarContrasenaBtn.innerHTML = '<i class="material-symbols-rounded">visibility_off</i>';
+                }
+            });

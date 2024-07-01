@@ -1,21 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap')
-
-// Variables
-$white: #FFFFFF
-$black: #000000
 $accent: #6366F1
-
-$form-width: 300px
-
-#mostrarContrasena
-  width: 60px
-  height: 50px
-  align-self: flex-end
-  justify-self: end !important
-  margin-left: 160px !important
-  margin-bottom: 10px
-  border-radius: 30px
-
 
 // Mixin definitions (assuming you have these mixins defined somewhere in your code)
 @mixin border-top-radius($radius)
@@ -44,104 +27,232 @@ body.register
   background-position: center
   background-repeat: no-repeat
 
-/* Form */
 .form
-  position: relative
-  z-index: 1
-  background: $white
-  max-width: $form-width
-  margin: 0 auto 100px
+  display: flex
+  flex-direction: column
+  gap: 10px
+  background-color: #ffffff
   padding: 30px
-  @include border-top-radius(3px)
-  @include border-bottom-radius(3px)
-  text-align: center
+  width: 450px
+  border-radius: 20px
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
   .thumbnail
-    background: $accent
-    width: 150px
-    height: 150px
-    margin: 0 auto 30px
-    padding: 50px 30px
-    @include border-top-radius(100%)
-    @include border-bottom-radius(100%)
-    @include box-sizing(border-box)
-    img
-      display: block
-      width: 100%
-  input
-    outline: 0
-    background: darken($white, 5%)
-    width: 100%
-    border: 0
-    margin: 0 0 15px
-    padding: 15px
-    @include border-top-radius(3px)
-    @include border-bottom-radius(3px)
-    @include box-sizing(border-box)
-    font-size: 14px
-  button
-    outline: 0
-    background: $accent
-    width: 100%
-    border: 0
-    padding: 15px
-    @include border-top-radius(3px)
-    @include border-bottom-radius(3px)
-    color: $white
-    font-size: 14px
-    @include transition(all .3s ease)
-    cursor: pointer
-  .message
-    margin: 15px 0 0
-    color: darken($white, 30%)
-    font-size: 12px
-    a
-      color: $accent
-      text-decoration: none
-  .register-form
-    display: none
+      background: #0D3B66
+      width: 150px
+      height: 150px
+      margin: 0 auto 2px
+      padding: 50px 30px
+      @include border-top-radius(100%)
+      @include border-bottom-radius(100%)
+      @include box-sizing(border-box)
+      img
+        display: block
+        width: 100%
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap')
 
-.container
-  position: relative
-  z-index: 1
-  max-width: $form-width
+$uniquifier: 'Noto style'
+$weight: 400
+
+$mainColor: #F0F3FF
+$navColor:  #0D3B66
+$textColor: #374151
+$titleColor: #000
+$hoverColor: #6366F1
+
+$border-radius: 20px
+
+.material-symbols-rounded
+  font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24
+
+.noto-sans-#{$uniquifier}
+  font-family: "Noto Sans", sans-serif
+  font-weight: $weight
+  font-style: normal
+
+body.registro
+  margin: 0 // Ajustar el margen a 0 para asegurar que la imagen cubra toda la pantalla
+  padding: 0 // Asegurar que no haya padding
+  height: 100vh // Ajustar la altura al 100% del viewport
+  font-family: 'Poppins', sans-serif
+  background-image: url('/img/login2.png')
+  background-size: cover // Asegura que la imagen cubra todo el fondo
+  background-position: center // Centrar la imagen de fondo
+  background-repeat: no-repeat // Evita que la imagen se repita
+
+
+
+body.login
+  margin: 2rem
+  height: 80vh
+  font-family: 'Poppins', sans-serif
+  background-image: url('/img/login2.png')
+
+
+
+.centered-index-content
+  margin: 5% 10% 0 10% /* Esto centra el div horizontalmente en la página */
+  //text-align: justify /* Esto centra el contenido dentro del div */
+
+.login-container
+  max-width: 600px
   margin: 0 auto
-  &:before,
-  &:after
-    content: ''
-    display: block
-    clear: both
-  .info
-    margin: 50px auto
-    text-align: center
-    h1
-      margin: 0 0 15px
-      padding: 0
-      font-size: 36px
-      font-weight: 300
-      color: lighten($black, 10%)
-    span
-      color: lighten($black, 30%)
-      font-size: 12px
-      a
-        color: $black
-        text-decoration: none
-      .fa
-        color: $accent
+  padding: 20px
+  border: none
+  border-radius: 5px
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 90%
+  background-color: none
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
 
-/* END Form */
+.registro-container
+  max-width: 600pxpx
+  margin: 0 auto
+  padding: 20px
+  border: none
+  border-radius: 5px
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 90%
+  background-color: none
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin-top: 50px
 
-/* Demo Purposes */
-body
-  background: #ccc
-  font-family: 'Roboto', sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  &:before
-    content: ''
-    position: fixed
-    top: 0
-    left: 0
-    display: block
-    background: rgba($white, .8)
-    width: 100%
-    height: 100%
+.title
+  font-size: 25px
+  text-align: center
+
+.login-form
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.form-group
+  display: flex
+  justify-content: start
+  width: 100%
+  flex-direction: column
+
+  button
+    color: white
+    background-color: $navColor
+    border-radius: $border-radius
+    align-self: center
+  
+    &:hover
+      background-color: $hoverColor
+
+#mostrarContrasena
+  width: 80px
+  align-self: flex-end
+  padding: 5px
+
+.form-label
+  font-size: 16px
+  margin: 10px 0
+
+.form-input
+  width: 100%
+  padding: 8px
+  font-size: 16px
+  border: 1px solid $navColor
+  border-radius: $border-radius
+  align-self: center
+  
+  input:hover, input:focus, input:active, input:focus-visible
+    border: 1px solid $hoverColor
+    outline-width: 1px
+    outline-style: solid
+    outline-color: $hoverColor
+
+.show-password-label
+  font-size: 12px
+
+.submit-button
+  padding: 10px
+  font-size: 16px
+  background-color: $navColor
+  color: white
+  border: none
+  border-radius: $border-radius
+  cursor: pointer
+  margin: 20px
+  width: 100%
+  
+  &:hover
+    background-color: $hoverColor
+
+.register-link
+  margin-top: 10px
+  text-align: center
+
+
+  form
+    margin: 0
+
+  button
+    padding: 5px 10px
+    margin-right: 5px
+    background-color: $navColor
+    color: white
+    border: none
+    border-radius: $border-radius
+    cursor: pointer
+
+    &:hover
+      background-color: $hoverColor
+
+  span
+    margin: 0 5px
+    font-weight: bold
+
+
+// Media queries para dispositivos móviles
+@media only screen and (max-width: 600px)
+  nav
+    padding: 5px 0
+    ul
+      margin-left: 10px
+    li
+      margin-right: 10px
+  .catalogo-container
+    margin: 5% 20% 5% 20%
+  .centered-index-content
+    margin: 5% 10% 0 10%
+  .producto-container
+    grid-template-columns: repeat(1, minmax(100px, 1fr))
+  .form
+    width: 90%
+
+// Media queries para tablets
+@media only screen and (min-width: 601px) and (max-width: 1024px)
+  .catalogo-container
+    margin: 5% 15% 5% 15%
+  .centered-index-content
+    margin: 5% 10% 0 10%
+  .producto-container
+    grid-template-columns: repeat(2, minmax(200px, 1fr))
+  .form
+    width: 80%
+
+// Media queries para desktops
+@media only screen and (min-width: 1025px)
+  .catalogo-container
+    margin: 5% 10% 5% 10%
+  .centered-index-content
+    margin: 5% 5% 0 5%
+  .producto-container
+    grid-template-columns: repeat(3, minmax(300px, 1fr))
+  .form
+    width: 450px

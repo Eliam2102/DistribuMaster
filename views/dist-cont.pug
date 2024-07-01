@@ -1,0 +1,123 @@
+extends layout
+
+block content
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Distribuciones Continuas
+        link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", rel="stylesheet")
+        link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+        link(rel="stylesheet", href="/css/distribuciones-style.css")
+    body
+        .container
+            // Barra de navegación para cambiar de slide
+            .slide-nav
+                button(data-slide="normal", title="Normal (Gaussiana)")
+                    | Normal (Gaussiana)
+                button(data-slide="exponencial", title="Exponencial")
+                    | Exponencial
+                button(data-slide="uniforme", title="Uniforme")
+                    | Uniforme
+                button(data-slide="t-student", title="T de Student")
+                    | T de Student
+                button(data-slide="chi-cuadrado", title="Chi-cuadrado")
+                    | Chi-cuadrado
+                button(data-slide="f-fisher", title="F de Fisher-Snedecor")
+                    | F de Fisher-Snedecor
+
+            // Contenedor de las slides
+            .slides
+                // Slide Normal (Gaussiana)
+                .slide#normal
+                    h2 Distribución Normal (Gaussiana)
+                    p La distribución normal, también conocida como la distribución gaussiana, es una de las distribuciones de probabilidad más importantes en estadística y describe la distribución de muchas variables aleatorias.
+                    form(action='/login', method='POST')
+                        label(for="mean") Media (μ):
+                        input(type="number", id="mean", name="mean", required)
+                        label(for="stddev") Desviación estándar (σ):
+                        input(type="number", step="0.01", id="stddev", name="stddev", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+                // Slide Exponencial
+                .slide#exponencial
+                    h2 Distribución Exponencial
+                    p La distribución exponencial describe el tiempo entre eventos en un proceso de Poisson, es decir, un proceso en el que los eventos ocurren de manera continua e independiente a una tasa constante.
+                    form
+                        label(for="lambda") Tasa de éxito (λ):
+                        input(type="number", step="0.01", id="lambda", name="lambda", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+                // Slide Uniforme
+                .slide#uniforme
+                    h2 Distribución Uniforme
+                    p La distribución uniforme describe una variable aleatoria continua que tiene la misma probabilidad de tomar cualquier valor dentro de un intervalo específico.
+                    form
+                        label(for="a") Límite inferior (a):
+                        input(type="number", id="a", name="a", required)
+                        label(for="b") Límite superior (b):
+                        input(type="number", id="b", name="b", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+                // Slide T de Student
+                .slide#t-student
+                    h2 Distribución T de Student
+                    p La distribución t de Student se utiliza en la estimación de la media de una población normalmente distribuida cuando el tamaño de la muestra es pequeño y la varianza de la población es desconocida.
+                    form
+                        label(for="df") Grados de libertad (df):
+                        input(type="number", id="df", name="df", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+                // Slide Chi-cuadrado
+                .slide#chi-cuadrado
+                    h2 Distribución Chi-cuadrado
+                    p La distribución chi-cuadrado es una distribución continua que se utiliza principalmente en pruebas de hipótesis y construcción de intervalos de confianza.
+                    form
+                        label(for="df") Grados de libertad (df):
+                        input(type="number", id="df", name="df", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+                // Slide F de Fisher-Snedecor
+                .slide#f-fisher
+                    h2 Distribución F de Fisher-Snedecor
+                    p La distribución F de Fisher-Snedecor se utiliza en análisis de varianza (ANOVA), en la comparación de dos muestras, y en la prueba de hipótesis sobre la igualdad de dos varianzas.
+                    form
+                        label(for="df1") Grados de libertad del numerador (df1):
+                        input(type="number", id="df1", name="df1", required)
+                        label(for="df2") Grados de libertad del denominador (df2):
+                        input(type="number", id="df2", name="df2", required)
+                        button(type="submit") Calcular
+                    button.export
+                        i.ri-file-pdf-line
+                        | Exportar a PDF
+
+        // Script para cambiar de slide
+    script.
+        document.querySelectorAll('.slide-nav button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.slide').forEach(slide => {
+                    slide.style.display = 'none';
+                });
+                document.getElementById(button.getAttribute('data-slide')).style.display = 'block';
+                // Añadir y quitar la clase active para el botón seleccionado
+                document.querySelectorAll('.slide-nav button').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+        document.getElementById('normal').style.display = 'block'; // Mostrar la primera slide por defecto
+        document.querySelector('.slide-nav button[data-slide="normal"]').classList.add('active'); // Marcar el primer botón como activo

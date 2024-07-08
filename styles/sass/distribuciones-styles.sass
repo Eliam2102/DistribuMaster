@@ -1,17 +1,18 @@
 body
-  font-family: 'Lato', sans-serif
+  font-family: 'Roboto', sans-serif
   background-color: #f0f2f5
   display: flex
   justify-content: center
-  align-items: center
+  align-items: flex-start
   height: 100vh
   margin: 0
-  padding: 0 10px !important // Espacio de separación en los laterales para pantallas pequeñas
+  padding: 10px
 
 .slide-nav
   display: flex
   justify-content: space-around
   margin-bottom: 20px
+  margin-top: 25px
 
   button
     background-color: #6366f1
@@ -25,7 +26,7 @@ body
     align-items: center // Centrar el ícono verticalmente
 
     &:hover, &.active
-      background-color: #4f52c1
+      background-color: #090c61
 
     &::before
       font-size: 20px // Tamaño del ícono
@@ -98,7 +99,7 @@ body
     gap: 1.5px
 
     button
-      width: 48% // Ajustar el ancho para que quepan dos en una fila
+      width: 48% 
       height: 40px
       margin: 1.5px
       padding: 5px 10px

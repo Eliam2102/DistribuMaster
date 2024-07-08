@@ -6,7 +6,7 @@ block content
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Distribuciones Discretas
     link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
-    link(href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet")
     link(rel="icon", type="image/png", href="/img/favicon-chart.png")
     link(rel="stylesheet", href="/css/distribuciones-styles.css")
   body
@@ -30,12 +30,28 @@ block content
         .slide#binomial
           h2 Distribución Binomial
           p La distribución binomial describe el número de éxitos en una secuencia de n ensayos independientes con una probabilidad constante p de éxito.
-          form(action='/login', method='POST')
-            label(for="n") Número de ensayos (n):
-            input(type="number", id="n", name="n", required)
-            label(for="p") Probabilidad de éxito (p):
-            input(type="number", step="0.01", id="p", name="p", required)
+          p Por favor ingresa los valores en los campos correspondientes para obtener el resultado
+          p(style="font-size: 1em; color: red;") **Puntos importantes:**
+          p(style="font-size: 0.9em; color: red;") - Número de ensayos (n): Debe ser un entero positivo.
+          p(style="font-size: 0.9em; color: red;") - Número de éxitos deseados (k): Debe ser un entero positivo, no mayor a (n).
+          p(style="font-size: 0.9em; color: red;") - Probabilidad de éxito (p): Debe ser un valor entre 0 y 1.
+          form(action='/calcular-operacion', method='POST')
+            input(type="hidden", name="tipocalculo", value="binomial")
+            label(for="parametro_principal") Número de ensayos (n):
+            p(style="font-size: 0.9em; color: #666;") Donde 𝑛 es el número de ensayos.
+            input(type="number", id="parametro_principal", name="parametro_principal", required)
+            label(for="parametro_secundario") Número de éxitos deseados (k):
+            p(style="font-size: 0.9em; color: #666;") Donde k es el número de éxitos deseados.
+            input(type="number", step="0.1", id="parametro_secundario", name="parametro_secundario", required)
+            label(for="parametro_terciario") Probabilidad de éxito (p):
+            p(style="font-size: 0.9em; color: #666;") Donde 𝑝 es la probabilidad de éxito en un solo ensayo.
+            input(type="number", step="0.1", id="parametro_terciario", name="parametro_terciario", required)
             button(type="submit") Calcular
+          .result
+            h3 Resultado
+            p Aquí aparecerá el resultado del cálculo.
+            // Contenedor de la gráfica
+            #binomialChart(style="width: 600px; height: 400px;")
           button.export
             i.ri-file-pdf-line
             | Exportar a PDF
@@ -44,10 +60,22 @@ block content
         .slide#poisson
           h2 Distribución Poisson
           p La distribución de Poisson describe el número de eventos que ocurren en un intervalo de tiempo fijo, dado un promedio constante λ de ocurrencias.
-          form
-            label(for="lambda") Tasa de éxito (λ):
-            input(type="number", step="0.01", id="lambda", name="lambda", required)
+          p Por favor ingresa los valores en los campos correspondientes para obtener el resultado
+          p(style="font-size: 1em; color: red;") **Puntos importantes:**
+          p(style="font-size: 0.9em; color: red;") - Tasa de éxito (λ): Debe ser un valor positivo.
+          p(style="font-size: 0.9em; color: red;") - Número de ocurrencias (k): Debe ser un entero positivo.
+          form(action='/calcular-operacion', method='POST')
+            input(type="hidden", name="tipocalculo", value="poisson")
+            label(for="parametro_principal") Tasa de éxito (λ):
+            input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
+            label(for="parametro_secundario") Número de ocurrencias (k):
+            input(type="number", step="0.01", id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
+          .result
+            h3 Resultado
+            p Aquí aparecerá el resultado del cálculo.
+            // Contenedor de la gráfica
+            #poissonChart(style="width: 600px; height: 400px;")
           button.export
             i.ri-file-pdf-line
             | Exportar a PDF
@@ -56,10 +84,24 @@ block content
         .slide#geometrica
           h2 Distribución Geométrica
           p La distribución geométrica describe el número de ensayos necesarios para obtener el primer éxito en una serie de ensayos independientes con probabilidad constante p de éxito.
-          form
-            label(for="p") Probabilidad de éxito (p):
-            input(type="number", step="0.01", id="p", name="p", required)
+          p A continuación ingresa el valor de p y k:
+          p(style="font-size: 1em; color: red;") **Puntos importantes:**
+          p(style="font-size: 0.9em; color: red;") - Probabilidad de éxito (p): Debe ser un valor entre 0 y 1.
+          p(style="font-size: 0.9em; color: red;") - k es un número entero positivo, ya que no se pueden tener intentos negativos.
+          form(action='/calcular-operacion', method='POST')
+            input(type="hidden", name="tipocalculo", value="geometrica")
+            label(for="parametro_principal") Probabilidad de éxito (p):
+            p(style="font-size: 0.9em; color: #666;") Donde (p) es la probabilidad de éxito, es decir un valor entre 0 y 1 que representa la probabilidad de obtener un éxito en un solo ensayo.
+            input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
+            label(for="parametro_secundario") Probabilidad de éxito (K):
+            p(style="font-size: 0.9em; color: #666;") Donde (k) es la variable aleatoria que representa el número de ensayos necesarios para obtener el primer éxito.
+            input(type="number", step="0.01", id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
+          .result
+            h3 Resultado
+            p Aquí aparecerá el resultado del cálculo.
+            // Contenedor de la gráfica
+            #geometricaChart(style="width: 600px; height: 400px;")
           button.export
             i.ri-file-pdf-line
             | Exportar a PDF
@@ -68,14 +110,31 @@ block content
         .slide#hipergeometrica
           h2 Distribución Hipergeométrica
           p La distribución hipergeométrica describe el número de éxitos en una muestra de tamaño n extraída sin reemplazo de una población finita de tamaño N que contiene K éxitos.
-          form
-            label(for="N") Tamaño de la población (N):
-            input(type="number", id="N", name="N", required)
-            label(for="K") Número de éxitos en la población (K):
-            input(type="number", id="K", name="K", required)
-            label(for="n") Número de ensayos (n):
-            input(type="number", id="n", name="n", required)
+          p(style="font-size: 1em; color: red;") **Puntos importantes:**
+          p(style="font-size: 0.9em; color: red;") - Tamaño de la población (N): Debe ser un entero positivo mayor que 0.
+          p(style="font-size: 0.9em; color: red;") - Número de éxitos en la población (K): Debe ser un entero positivo menor o igual al tamaño de la población.
+          p(style="font-size: 0.9em; color: red;") - Tamaño de la muestra (n): Debe ser un entero positivo menor o igual al tamaño de la población.
+          p(style="font-size: 0.9em; color: red;") - Número de éxitos en la muestra (k): Debe ser un entero positivo menor o igual al tamaño de la muestra.
+          form(action='/calcular-operacion', method='POST')
+            input(type="hidden", name="tipocalculo", value="hipergeometrica")
+            label(for="parametro_principal") Tamaño de la población (N):
+            p(style="font-size: 0.9em; color: #666;") Ingrese el tamaño total de la población de la cual se extraerá la muestra. Debe ser un número entero mayor que 0.
+            input(type="number", id="parametro_principal", name="parametro_principal", min="1", required)
+            label(for="parametro_secundario") Número de éxitos en la población (K):
+            p(style="font-size: 0.9em; color: #666;") Ingrese el número total de éxitos en la población. Debe ser un número entero mayor que 0 y menor o igual al tamaño de la población.
+            input(type="number", id="parametro_secundario", name="parametro_secundario", min="1", required)
+            label(for="parametro_terciario") Tamaño de la muestra (n):
+            p(style="font-size: 0.9em; color: #666;") Ingrese el tamaño de la muestra que se va a extraer de la población. Debe ser un número entero mayor que 0 y menor o igual al tamaño de la población.
+            input(type="number", id="parametro_terciario", name="parametro_terciario", min="1", required)
+            label(for="parametro_cuaternario") Número de éxitos en la muestra (k):
+            p(style="font-size: 0.9em; color: #666;") Ingrese el número de éxitos deseados en la muestra. Debe ser un número entero mayor que 0 y menor o igual al tamaño de la muestra.
+            input(type="number", id="parametro_cuaternario", name="parametro_cuaternario", min="1", required)
             button(type="submit") Calcular
+          .result
+            h3 Resultado
+            p Aquí aparecerá el resultado del cálculo.
+            // Contenedor de la gráfica
+            #hipergeometricaChart(style="width: 600px; height: 400px;")
           button.export
             i.ri-file-pdf-line
             | Exportar a PDF
@@ -83,15 +142,30 @@ block content
         // Slide Bernoulli
         .slide#bernoulli
           h2 Distribución Bernoulli
-          p La distribución de Bernoulli describe el resultado de un solo ensayo que tiene una probabilidad p de éxito y una probabilidad 1-p de fracaso.
-          form
-            label(for="p") Probabilidad de éxito (p):
-            input(type="number", step="0.01", id="p", name="p", required)
+          p La distribución de Bernoulli describe un experimento que solo tiene dos resultados posibles: éxito (con probabilidad p) o fracaso (con probabilidad 1 - p).
+          p A continuación ingresa el valor de p y x:
+          p(style="font-size: 1em; color: red;") **Puntos importantes:**
+          p(style="font-size: 0.9em; color: red;") - Probabilidad de éxito (p): Debe ser un valor entre 0 y 1.
+          p(style="font-size: 0.9em; color: red;") - x puede tomar dos valores posibles:
+          p(style="font-size: 0.9em; color: red;") - x=1: Representa el evento de éxito.
+          p(style="font-size: 0.9em; color: red;") - x=0: Representa el evento de fracaso. 
+          form(action='/calcular-operacion', method='POST')
+            input(type="hidden", name="tipocalculo", value="bernoulli")
+            label(for="parametro_principal") Probabilidad de éxito (p):
+            p(style="font-size: 0.9em; color: #666;") Donde 𝑝 es la probabilidad de éxito en un solo ensayo.
+            input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
+            label(for="parametro_secundario") Variable aleatoria (x):
+            p(style="font-size: 0.9em; color: #666;") Donde x es la variable aleatoria que toma valores binarios que indican el resultado de un único ensayo de Bernoulli.
+            input(type="number", step="0.01", max="1",id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
+          .result
+            h3 Resultado
+            p Aquí aparecerá el resultado del cálculo.
+            // Contenedor de la gráfica
+            #bernoulliChart(style="width: 600px; height: 400px;")
           button.export
             i.ri-file-pdf-line
             | Exportar a PDF
-    
 
     // Script para cambiar de slide
     script.
@@ -108,3 +182,35 @@ block content
       });
       document.getElementById('binomial').style.display = 'block'; // Mostrar la primera slide por defecto
       document.querySelector('.slide-nav button[data-slide="binomial"]').classList.add('active'); // Marcar el primer botón como activo
+
+    // Script para inicializar los gráficos con ECharts
+    script(src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js")
+    script.
+      // Función para inicializar una gráfica de ejemplo
+      function initChart(id, title, data) {
+        var chartDom = document.getElementById(id);
+        var myChart = echarts.init(chartDom);
+        var option = {
+          title: {
+            text: title
+          },
+          tooltip: {},
+          xAxis: {
+            data: ['A', 'B', 'C', 'D', 'E']
+          },
+          yAxis: {},
+          series: [{
+            name: 'Ejemplo',
+            type: 'bar',
+            data: data
+          }]
+        };
+        myChart.setOption(option);
+      }
+
+      // Inicializar gráficos de ejemplo en cada slide
+      initChart('binomialChart', 'Distribución Binomial', [5, 20, 36, 10, 10]);
+      initChart('poissonChart', 'Distribución Poisson', [15, 23, 43, 15, 13]);
+      initChart('geometricaChart', 'Distribución Geométrica', [10, 30, 40, 20, 15]);
+      initChart('hipergeometricaChart', 'Distribución Hipergeométrica', [12, 25, 30, 22, 18]);
+      initChart('bernoulliChart', 'Distribución Bernoulli', [7, 14, 27, 19, 22]);

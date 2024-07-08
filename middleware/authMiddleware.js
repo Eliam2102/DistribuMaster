@@ -17,12 +17,12 @@ async function authenticate(req, res, next) {
         const decoded = jwt.verify(token, process.env.RSA_PRIVATE_KEY);
 
         // Almacena el ID del usuario en la solicitud para su posterior uso
-        req.userId = decoded.userId;
+        req.user.id = { id: decoded.data.userId };
 
         next();
 
     } catch (err) {
-        // Si hay un error en la verificación del token, redirige al usuario al login
+        // Si hay un error en la verificación del token, redirige al usuario al loginzz
         return res.redirect('/login');
     }
 }

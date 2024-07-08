@@ -26,7 +26,7 @@ body {
   align-items: center;
 }
 .slide-nav button:hover, .slide-nav button.active {
-  background-color: #4f52c1;
+  background-color: #090c61;
 }
 .slide-nav button::before {
   font-size: 20px;

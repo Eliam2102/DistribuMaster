@@ -14,6 +14,9 @@ const critValue= require('./critic-value');
 const probAcum = require('./prob-acum');
 const probInt = require ('./prob-int');
 const probPuntual = require('./prob-puntual');
+const layout = require('./layout');
+const calcularOperacion = require('./calcular-operacion');
+const exportResultado = require('./exportar-resutado');
 
 //Configura las rutas
 router.use('/', index);
@@ -26,6 +29,8 @@ router.use('/critic-value', critValue);
 router.use('/prob-acum', probAcum);
 router.use('/prob-int', probInt);
 router.use('/prob-puntual', probPuntual);
-
+router.use('/layout', layout);
+router.use('/calcular-operacion', calcularOperacion);
+router.use('/exportar-resultado', exportResultado);
 
 module.exports = router;

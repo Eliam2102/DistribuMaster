@@ -36,7 +36,7 @@ block content
           p(style="font-size: 0.9em; color: red;") - Número de éxitos deseados (k): Debe ser un entero positivo, no mayor a (n).
           p(style="font-size: 0.9em; color: red;") - Probabilidad de éxito (p): Debe ser un valor entre 0 y 1.
           form(action='/calcular-operacion', method='POST')
-            input(type="hidden", name="tipocalculo", value="binomial")
+            input(type="hidden", name="tipocalculo", value="1")
             label(for="parametro_principal") Número de ensayos (n):
             p(style="font-size: 0.9em; color: #666;") Donde 𝑛 es el número de ensayos.
             input(type="number", id="parametro_principal", name="parametro_principal", required)
@@ -65,7 +65,7 @@ block content
           p(style="font-size: 0.9em; color: red;") - Tasa de éxito (λ): Debe ser un valor positivo.
           p(style="font-size: 0.9em; color: red;") - Número de ocurrencias (k): Debe ser un entero positivo.
           form(action='/calcular-operacion', method='POST')
-            input(type="hidden", name="tipocalculo", value="poisson")
+            input(type="hidden", name="tipocalculo", value="2")
             label(for="parametro_principal") Tasa de éxito (λ):
             input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
             label(for="parametro_secundario") Número de ocurrencias (k):
@@ -89,7 +89,7 @@ block content
           p(style="font-size: 0.9em; color: red;") - Probabilidad de éxito (p): Debe ser un valor entre 0 y 1.
           p(style="font-size: 0.9em; color: red;") - k es un número entero positivo, ya que no se pueden tener intentos negativos.
           form(action='/calcular-operacion', method='POST')
-            input(type="hidden", name="tipocalculo", value="geometrica")
+            input(type="hidden", name="tipocalculo", value="3")
             label(for="parametro_principal") Probabilidad de éxito (p):
             p(style="font-size: 0.9em; color: #666;") Donde (p) es la probabilidad de éxito, es decir un valor entre 0 y 1 que representa la probabilidad de obtener un éxito en un solo ensayo.
             input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
@@ -116,7 +116,7 @@ block content
           p(style="font-size: 0.9em; color: red;") - Tamaño de la muestra (n): Debe ser un entero positivo menor o igual al tamaño de la población.
           p(style="font-size: 0.9em; color: red;") - Número de éxitos en la muestra (k): Debe ser un entero positivo menor o igual al tamaño de la muestra.
           form(action='/calcular-operacion', method='POST')
-            input(type="hidden", name="tipocalculo", value="hipergeometrica")
+            input(type="hidden", name="tipocalculo", value="4")
             label(for="parametro_principal") Tamaño de la población (N):
             p(style="font-size: 0.9em; color: #666;") Ingrese el tamaño total de la población de la cual se extraerá la muestra. Debe ser un número entero mayor que 0.
             input(type="number", id="parametro_principal", name="parametro_principal", min="1", required)
@@ -150,7 +150,7 @@ block content
           p(style="font-size: 0.9em; color: red;") - x=1: Representa el evento de éxito.
           p(style="font-size: 0.9em; color: red;") - x=0: Representa el evento de fracaso. 
           form(action='/calcular-operacion', method='POST')
-            input(type="hidden", name="tipocalculo", value="bernoulli")
+            input(type="hidden", name="tipocalculo", value="5")
             label(for="parametro_principal") Probabilidad de éxito (p):
             p(style="font-size: 0.9em; color: #666;") Donde 𝑝 es la probabilidad de éxito en un solo ensayo.
             input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)

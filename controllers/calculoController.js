@@ -112,16 +112,16 @@ const calcularF = (d1, d2, x) => {
 //Finalización del bloque de distribuciones continuas
 
 // Creación de la función para poder calcular la operación según sea el parámetro
-async function calcularOperacion(req, res, id, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token) {
+async function calcularOperacion(req, res, UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token) {
     try {
-        const {userId, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token} = req.body;
+        const { tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token} = req.body;
 
-        console.log('Datos recibidos:', req.body);
-
+        console.log('Datos recibidos:', {UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario });
+        console.log('UsuarioID en controlador:', UsuarioID);
         let resultado;
 
         switch (tipocalculo) {
-            case 'binomial':
+            case '1':
                 const n = parseInt(parametro_principal);
                 const k = parseInt(parametro_secundario);
                 const p = parseFloat(parametro_terciario);
@@ -129,21 +129,21 @@ async function calcularOperacion(req, res, id, tipocalculo, parametro_principal,
                 console.log('Cálculo binomial:', resultado);
                 break;
 
-            case 'poisson':
+            case '2':
                 const lambda = parseFloat(parametro_principal);
                 const kPoisson = parseInt(parametro_secundario);
                 resultado = calcularPoisson(lambda, kPoisson);
                 console.log('Cálculo Poisson:', resultado);
                 break;
 
-            case 'geometrica':
+            case '3':
                 const pGeometrica = parseFloat(parametro_principal);
                 const kGeometrica = parseInt(parametro_secundario);
                 resultado = calcularGeometrica(pGeometrica, kGeometrica);
                 console.log('Cálculo geométrica:', resultado);
                 break;
 
-            case 'hipergeometrica':
+            case '4':
                 const N = parseInt(parametro_principal);
                 const K = parseInt(parametro_secundario);
                 const nHiper = parseInt(parametro_terciario);
@@ -152,14 +152,14 @@ async function calcularOperacion(req, res, id, tipocalculo, parametro_principal,
                 console.log('Cálculo hipergeométrica:', resultado);
                 break;
 
-            case 'bernoulli':
+            case '5':
                 const pBernoulli = parseFloat(parametro_principal);
                 const xBernoulli = parseInt(parametro_secundario);
                 resultado = calcularBernoulli(pBernoulli, xBernoulli);
                 console.log('Cálculo Bernoulli:', resultado);
                 break;
 
-            case 'normal':
+            case '6':
                 const mean = parseFloat(parametro_principal);
                 const std = parseFloat(parametro_secundario);
                 const xNormal = parseFloat(parametro_terciario);
@@ -167,14 +167,14 @@ async function calcularOperacion(req, res, id, tipocalculo, parametro_principal,
                 console.log('Cálculo normal:', resultado);
                 break;
 
-            case 'exponencial':
+            case '7':
                 const lambdaExp = parseFloat(parametro_principal);
                 const xExp = parseFloat(parametro_secundario);
                 resultado = calcularExponencial(lambdaExp, xExp);
                 console.log('Cálculo exponencial:', resultado);
                 break;
 
-            case 'uniforme':
+            case '8':
                 const a = parseFloat(parametro_principal);
                 const b = parseFloat(parametro_secundario);
                 const xUniforme = parseFloat(parametro_terciario);
@@ -182,21 +182,21 @@ async function calcularOperacion(req, res, id, tipocalculo, parametro_principal,
                 console.log('Cálculo uniforme:', resultado);
                 break;
 
-            case 'tstudent':
+            case '9':
                 const v = parseFloat(parametro_principal);
                 const t = parseFloat(parametro_secundario);
                 resultado = calcularTStudent(v, t);
                 console.log('Cálculo t de Student:', resultado);
                 break;
 
-            case 'chicuadrado':
+            case '10':
                 const kChi = parseFloat(parametro_principal);
                 const xChi = parseFloat(parametro_secundario);
                 resultado = calcularChiCuadrado(kChi, xChi);
                 console.log('Cálculo chi-cuadrado:', resultado);
                 break;
 
-            case 'f':
+            case '11':
                 const d1 = parseFloat(parametro_principal);
                 const d2 = parseFloat(parametro_secundario);
                 const xF = parseFloat(parametro_terciario);
@@ -209,7 +209,7 @@ async function calcularOperacion(req, res, id, tipocalculo, parametro_principal,
         }
 
         // Envía los datos calculados a la API utilizando el modelo `calculoModel`
-        await calculoModel.registrarCalculo(req.useId, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado, req.cookies.token);
+        await calculoModel.registrarCalculo(UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado, req.cookies.token);
 
         res.json({
             status: 'success',

@@ -1,7 +1,7 @@
 // authMiddleware.js
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 async function authenticate(req, res, next) {
     // Verifica si hay un token en las cookies de la solicitud
@@ -13,24 +13,28 @@ async function authenticate(req, res, next) {
     }
 
     try {
+
+        const privateKey = process.env.RSA_PRIVATE_KEY.replace(/\\n/g, '\n');
         // Verifica el token usando la clave privada RSA del entorno
-        const decoded = jwt.verify(token, process.env.RSA_PRIVATE_KEY);
+        const decoded = jwt.verify(token, privateKey);
 
         // Almacena el ID del usuario en la solicitud para su posterior uso
-        req.user.id = { id: decoded.data.userId };
+        req.user.id = decoded.data.UsuarioID ;
+        console.log('ID del usuario:', req.user.id);
 
         next();
 
     } catch (err) {
-        // Si hay un error en la verificación del token, redirige al usuario al loginzz
+        // Si hay un error en la verificación del token, redirige al usuario al login
         return res.redirect('/login');
     }
 }
 
 // Función para generar un token JWT
 function generateToken(data, expirationTime) {
+    const privateKey = process.env.RSA_PRIVATE_KEY.replace(/\\n/g, '\n');
     // Se firma el token utilizando el algoritmo RS256 y la clave privada RSA del entorno
-    return jwt.sign({ data }, process.env.RSA_PRIVATE_KEY, { algorithm: 'RS256', expiresIn: expirationTime });
+    return jwt.sign({ data }, privateKey, { algorithm: 'RS256', expiresIn: expirationTime });
 }
 
 

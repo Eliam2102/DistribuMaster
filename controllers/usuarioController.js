@@ -1,8 +1,7 @@
 const usuarioModel = require('../models/usuarioModel');
 const authMiddleWare = require('../middleware/authMiddleware');
 
-
-//Función asíncrona para ingresar usuarios a la BD
+// Función asincrónica para registrar un usuario
 async function registrarUsuario(nombre, email, password_hash) {
     // Se encriptan el nombre, email y hash de la contraseña de forma paralela
     let [nombreSeguro, emailSeguro, passwordHashSeguro] = await Promise.all([
@@ -15,7 +14,7 @@ async function registrarUsuario(nombre, email, password_hash) {
     return await usuarioModel.registrarUsuario(`${nombreSeguro},${emailSeguro},${passwordHashSeguro}`);
 }
 
-//Función para inicio de sesión del usuario
+// Función asincrónica para logear a un usuario
 async function logearUsuario(nombre, password) {
     // Se encriptan el nombre y la contraseña de forma paralela
     let [nombreSeguro, passwordSeguro] = await Promise.all([

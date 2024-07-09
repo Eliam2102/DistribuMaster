@@ -1,15 +1,14 @@
 const axios = require('axios');
 
 class Usuario {
-    constructor(id, nombre, email, password_hash) {
-        this.id = id;
+    constructor(UsuarioID, nombre, email, pass) {
+        this.UsuarioID = UsuarioID;
         this.nombre = nombre;
         this.email = email;
-        this.password_hash = password_hash;
+        this.pass = pass;
     }
 }
 
-//función asyncrona para poder registrar un usuario mediante axios y el endpoint de mi API
 async function registrarUsuario(dataSegura) {
     try {
         await axios.post(`${process.env.BASE_URL}/usuarios/registrar-usuario`, { dataSegura });
@@ -23,7 +22,7 @@ async function logearUsuario(dataSegura) {
     try {
         const response = await axios.post(`${process.env.BASE_URL}/usuarios/login`, {dataSegura});
         const usuario = response.data;
-        return new Usuario(usuario.id, usuario.nombre, usuario.email, usuario.password_hash);
+        return new Usuario(usuario.UsuarioID, usuario.nombre, usuario.email, usuario.pass);
     } catch (error) {
         console.error('Error al obtener usuario por nombre:', error);
         throw error;
@@ -33,4 +32,4 @@ async function logearUsuario(dataSegura) {
 module.exports = {
     registrarUsuario,
     logearUsuario
-}
+};

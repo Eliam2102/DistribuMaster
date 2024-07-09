@@ -1,8 +1,8 @@
 const axios = require('axios');
 
 class Calculos {
-    constructor( userId , tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado) {
-        this.userId = userId;
+    constructor( UsuarioID , tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado) {
+        this.UsuarioID = UsuarioID;
         this.tipocalculo = tipocalculo;
         this.parametro_principal = parametro_principal;
         this.parametro_secundario = parametro_secundario;
@@ -13,7 +13,7 @@ class Calculos {
 }
 
 // BLOQUE CON FUNCIÓN PARA PODER ALMACENAR EL CALCULO EFECTUADO
-async function registrarCalculo(userId, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado, token) {
+async function registrarCalculo(UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado, token) {
     const axiosConfig = {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -21,7 +21,7 @@ async function registrarCalculo(userId, tipocalculo, parametro_principal, parame
     };
     try {
         const response = await axios.post(`${process.env.BASE_URL}/calculo/registrar-operacion`, {
-            userId,
+            UsuarioID,
             tipocalculo,
             parametro_principal,
             parametro_secundario,
@@ -38,17 +38,17 @@ async function registrarCalculo(userId, tipocalculo, parametro_principal, parame
 }
 
 // Función para poder obtener los calculos (historial)
-async function obtenerHistorial(userId, token) {
+async function obtenerHistorial(UsuarioID, token) {
     const axiosConfig = {
         headers: {
             'Authorization': `Bearer ${token}`
         }
     };
     try {
-        const response = await axios.post(`${process.env.BASE_URL}/calculo/historial/`, { userId }, axiosConfig);
+        const response = await axios.post(`${process.env.BASE_URL}/calculo/historial/`, { UsuarioID }, axiosConfig);
         return response.data.map(calculo => {
             return new Calculos(
-                calculo.userId,
+                calculo.UsuarioID,
                 calculo.tipocalculo,
                 calculo.parametro_principal,
                 calculo.parametro_secundario,

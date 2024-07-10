@@ -4,7 +4,7 @@ const authMiddleWare = require('../middleware/authMiddleware');
 
 //Exihibe la pagína al puerto destinado
 router.get('/',authMiddleWare.authenticate, (req, res, next) => {
-    res.render('index', { title: 'Iniciar sesión', user: req.user != null ? `${req.user.nombre}` : '' });
+    res.render('index', { title: req.user != null ? `Bienvenido ${req.user.email}` : 'DistribuMaster', user: req.user != null ? `${req.user.email}` : ''});
     next()
 });
 

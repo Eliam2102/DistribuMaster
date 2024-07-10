@@ -1,0 +1,134 @@
+// Variables de colores
+$primary-color: #3498db
+$secondary-color: #2ecc71
+$background-color: #f5f5f5
+$text-color: #333
+
+// Reset y tipografía base
+*,
+*::before,
+*::after
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+body
+  font-family: 'Lato', sans-serif
+  background-color: $background-color
+  color: $text-color
+  line-height: 1.6
+
+.container-resultados
+  padding: 20px
+  max-width: 1200px
+  margin: auto
+  border: 1px solid #ddd
+  border-radius: 5px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+.header
+  text-align: center
+  margin-bottom: 20px
+
+.btn
+  display: inline-block
+  padding: 10px 20px
+  font-size: 16px
+  text-align: center
+  color: #fff
+  background-color: $primary-color
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  text-decoration: none
+  transition: background-color 0.3s ease
+
+  &:hover
+    background-color: darken($primary-color, 10%)
+
+.results
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 20px
+  background-color: #fff
+  padding: 20px
+  border-radius: 5px
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  max-width: 100%
+  margin: 20px 0
+  p
+    font-weight: bold
+    font-style: italic
+
+.buttons
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  margin-top: 20px
+  gap: 10px
+
+  .export-buttons
+    display: flex
+    gap: 10px
+    &.hidden
+      display: none
+
+  .export-btn
+    display: inline-block
+    padding: 10px 20px
+    font-size: 16px
+    text-align: center
+    color: #fff
+    background-color: $secondary-color
+    border: none
+    border-radius: 5px
+    cursor: pointer
+    transition: background-color 0.3s ease
+
+    &:hover
+      background-color: darken($secondary-color, 10%)
+
+    &.hidden
+      display: none
+
+// Responsividad
+@media (max-width: 1200px)
+  .container-resultados
+    padding: 15px
+
+  .results
+    padding: 15px
+
+@media (max-width: 992px)
+  .btn, .export-btn
+    font-size: 14px
+    padding: 8px 16px
+
+  
+
+@media (max-width: 768px)
+  .btn, .export-btn
+    font-size: 12px
+    padding: 6px 12px
+
+
+@media (max-width: 576px)
+  .container-resultados
+    padding: 10px
+
+  .results
+    padding: 10px
+
+  .btn, .export-btn
+    font-size: 10px
+    padding: 4px 8px
+
+
+@media (max-width: 480px)
+  .btn, .export-btn
+    font-size: 8px
+    padding: 2px 4px

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Historial de Cálculos
+        link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet")
+        link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+        link(rel="stylesheet", href="/css/historial-styles.css")
+
+    body
+        .container
+        h1 Historial de Cálculos
+
+        .historial
+            each calculo in calculos
+            .card
+                .card-body
+                h2= calculo.tipo
+                p 
+                    strong Parámetros: 
+                    span= calculo.parametros
+                p 
+                    strong Resultado: 
+                    span= calculo.resultado
+                p 
+                    strong Fecha: 
+                    span= calculo.fecha
+
+        // Script para inicializar el historial
+    script.
+        // Aquí puedes añadir alguna funcionalidad con JavaScript si es necesario

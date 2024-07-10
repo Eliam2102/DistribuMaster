@@ -1,8 +1,9 @@
 const calculoModel = require('../models/calculoModel');
 const authMiddleWare = require('../middleware/authMiddleware');
 const math = require('mathjs');
-const jstat = require('jstat');
 
+
+//Importante mencionar qeu para facilitar los calculos usamos la biblioteca mathjs
 // Función para calcular la distribución binomial
 const calcularBinomial = (n, k, p) => {
     if (isNaN(n) || isNaN(k) || isNaN(p)) {
@@ -61,57 +62,7 @@ const calcularBernoulli = (p, x) => {
     return x === 1 ? p : 1 - p;
 };
 
-//BLOQUE PARA EL CALCULO DE LAS DISTRIBUCIONES CONTINUAS
-// Función para calcular la distribución normal usando jstat
-const calcularNormal = (mean, std, x) => {
-    if (isNaN(mean) || isNaN(std) || isNaN(x)) {
-        throw new Error("Los parámetros mean, std y x deben ser numéricos");
-    }
-    return jstat.normal.pdf(x, mean, std);
-};
-
-// Función para calcular la distribución exponencial usando jstat
-const calcularExponencial = (lambda, x) => {
-    if (isNaN(lambda) || isNaN(x)) {
-        throw new Error("Los parámetros lambda y x deben ser numéricos");
-    }
-    return jstat.exponential.pdf(x, lambda);
-};
-
-// Función para calcular la distribución uniforme usando jstat
-const calcularUniforme = (a, b, x) => {
-    if (isNaN(a) || isNaN(b) || isNaN(x)) {
-        throw new Error("Los parámetros a, b y x deben ser numéricos");
-    }
-    return jstat.uniform.pdf(x, a, b);
-};
-
-// Función para calcular la distribución t de Student usando jstat
-const calcularTStudent = (v, t) => {
-    if (isNaN(v) || isNaN(t)) {
-        throw new Error("Los parámetros v y t deben ser numéricos");
-    }
-    return jstat.studentt.pdf(t, v);
-};
-
-// Función para calcular la distribución chi-cuadrado usando jstat
-const calcularChiCuadrado = (k, x) => {
-    if (isNaN(k) || isNaN(x)) {
-        throw new Error("Los parámetros k y x deben ser numéricos");
-    }
-    return jstat.chisquare.pdf(x, k);
-};
-
-// Función para calcular la distribución F de Fisher-Snedecor usando jstat
-const calcularF = (d1, d2, x) => {
-    if (isNaN(d1) || isNaN(d2) || isNaN(x)) {
-        throw new Error("Los parámetros d1, d2 y x deben ser numéricos");
-    }
-    return jstat.centralF.pdf(x, d1, d2);
-};
-//Finalización del bloque de distribuciones continuas
-
-// Creación de la función para poder calcular la operación según sea el parámetro
+// Creación de la función para poder calcular la operación según sea el parámetro recibido
 async function calcularOperacion(req, res, UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token) {
     try {
         const { tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, token} = req.body;
@@ -205,17 +156,20 @@ async function calcularOperacion(req, res, UsuarioID, tipocalculo, parametro_pri
                 break;
 
             default:
-                throw new Error('Tipo de cálculo no soportado');
+            throw new Error('Tipo de cálculo no soportado');
         }
 
         // Envía los datos calculados a la API utilizando el modelo `calculoModel`
         await calculoModel.registrarCalculo(UsuarioID, tipocalculo, parametro_principal, parametro_secundario, parametro_terciario, parametro_cuaternario, resultado, req.cookies.token);
-
-        res.json({
-            status: 'success',
-            data: {
-                resultado
-            }
+        // redirigir a la vista
+        // Redirección a la vista de resultados con los parámetros y el resultado
+        res.render('resultado-discretas', {
+            tipocalculo,
+            parametro_principal,
+            parametro_secundario,
+            parametro_terciario,
+            parametro_cuaternario,
+            resultado
         });
     } catch (error) {
         console.error('Error en el cálculo:', error);

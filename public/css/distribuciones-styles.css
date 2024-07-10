@@ -39,6 +39,7 @@ body {
 
 .slides .slide {
   display: none;
+  margin-bottom: 15px;
 }
 .slides .slide.active {
   display: block;

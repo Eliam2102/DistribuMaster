@@ -21,6 +21,7 @@ async function authenticate(req, res, next) {
         // Almacena el ID del usuario en la solicitud para su posterior uso
         req.user.id = decoded.data.UsuarioID ;
         console.log('ID del usuario:', req.user.id);
+        
 
         next();
 

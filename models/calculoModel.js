@@ -30,6 +30,7 @@ async function registrarCalculo(UsuarioID, tipocalculo, parametro_principal, par
             resultado
         }, axiosConfig);
         console.log('Información a enviar:', response.data);
+        //Regresar la data que espera de la API
         return response.data;
     } catch (error) {
         console.error('Error al registrar el calculo efectuado', error);

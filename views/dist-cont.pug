@@ -12,19 +12,16 @@ block content
     body
         .container
             // Barra de navegación para cambiar de slide
+            // Esto con el fin de no construir una vista para cada una, ya que, cada uno de los calculos requiere parametro diferentes
+            //por ende no se puede utilizar una vista para todos es por ello se usa una sola y lo unico que se hace es
+            // desplzarnos entre slides que cada una cuenta con el form para mandar los datos.
             .slide-nav
-                button(data-slide="normal", title="Normal (Gaussiana)")
-                    | Normal (Gaussiana)
-                button(data-slide="exponencial", title="Exponencial")
-                    | Exponencial
-                button(data-slide="uniforme", title="Uniforme")
-                    | Uniforme
-                button(data-slide="t-student", title="T de Student")
-                    | T de Student
-                button(data-slide="chi-cuadrado", title="Chi-cuadrado")
-                    | Chi-cuadrado
-                button(data-slide="f-fisher", title="F de Fisher-Snedecor")
-                    | F de Fisher-Snedecor
+                button(data-slide="normal", title="Normal (Gaussiana)") Normal (Gaussiana)
+                button(data-slide="exponencial", title="Exponencial") Exponencial
+                button(data-slide="uniforme", title="Uniforme") Uniforme
+                button(data-slide="t-student", title="T de Student") T de Student
+                button(data-slide="chi-cuadrado", title="Chi-cuadrado") Chi-cuadrado
+                button(data-slide="f-fisher", title="F de Fisher-Snedecor") F de Fisher-Snedecor
 
             // Contenedor de las slides
             .slides
@@ -32,88 +29,79 @@ block content
                 .slide#normal
                     h2 Distribución Normal (Gaussiana)
                     p La distribución normal, también conocida como la distribución gaussiana, es una de las distribuciones de probabilidad más importantes en estadística y describe la distribución de muchas variables aleatorias.
-                    form(action='/calcular_operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="6")
                         input(type="hidden", name="tipocalculo", value="normal")
                         label(for="parametro_principal") Media (μ):
-                        input(type="number", id="parametro_principal", name="parametro_principal", required)
+                        input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese la media (μ), que representa el valor promedio de la distribución.
                         label(for="parametro_secundario") Desviación estándar (σ):
                         input(type="number", step="0.01", id="parametro_secundario", name="parametro_secundario", required)
                         p Ingrese la desviación estándar (σ), que representa la dispersión de los datos alrededor de la media.
-                        label(for="parametro_terciario") Desviación estándar (σ):
+                        label(for="parametro_terciario") Valor (x):
                         input(type="number", step="0.01", id="parametro_terciario", name="parametro_terciario", required)
-                        p Ingrese la  (x), que representa el valor dado en el que se quiere concoer.
+                        p Ingrese el valor (x) en el que se quiere conocer la probabilidad.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
                 // Slide Exponencial
                 .slide#exponencial
                     h2 Distribución Exponencial
                     p La distribución exponencial describe el tiempo entre eventos en un proceso de Poisson, es decir, un proceso en el que los eventos ocurren de manera continua e independiente a una tasa constante.
-                    form(action='/calcular-operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="7")
                         label(for="parametro_principal") Tasa de éxito (λ):
                         input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese la tasa de éxito (λ), que representa la tasa a la cual ocurren los eventos.
-                        label(for="parametro_terciario") Desviación estándar (σ):
+                        label(for="parametro_terciario") Valor (x):
                         input(type="number", step="0.01", id="parametro_terciario", name="parametro_terciario", required)
-                        p Ingrese la  (x), que representa el valor dado en el que se quiere concoer.
+                        p Ingrese el valor (x) en el que se quiere conocer la probabilidad.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
                 // Slide Uniforme
                 .slide#uniforme
                     h2 Distribución Uniforme
                     p La distribución uniforme describe una variable aleatoria continua que tiene la misma probabilidad de tomar cualquier valor dentro de un intervalo específico.
-                    form(action='/calcular-operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="8")
                         label(for="parametro_principal") Límite inferior (a):
                         input(type="number", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese el límite inferior (a), que representa el valor mínimo del intervalo.
                         label(for="parametro_secundario") Límite superior (b):
                         input(type="number", id="parametro_secundario", name="parametro_secundario", required)
                         p Ingrese el límite superior (b), que representa el valor máximo del intervalo.
-                        label(for="parametro_terciario") Desviación estándar (σ):
+                        label(for="parametro_terciario") Valor (x):
                         input(type="number", step="0.01", id="parametro_terciario", name="parametro_terciario", required)
-                        p Ingrese la  (x), que representa el valor dado en el que se quiere concoer.
+                        p Ingrese el valor (x) en el que se quiere conocer la probabilidad.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
                 // Slide T de Student
                 .slide#t-student
                     h2 Distribución T de Student
                     p La distribución t de Student se utiliza en la estimación de la media de una población normalmente distribuida cuando el tamaño de la muestra es pequeño y la varianza de la población es desconocida.
-                    form(action='/calcular-operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="9")
                         label(for="parametro_principal") Grados de libertad (df):
                         input(type="number", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese los grados de libertad (df), que representan el número de valores que son libres de variar en el cálculo de una estadística.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
                 // Slide Chi-cuadrado
                 .slide#chi-cuadrado
                     h2 Distribución Chi-cuadrado
                     p La distribución chi-cuadrado es una distribución continua que se utiliza principalmente en pruebas de hipótesis y construcción de intervalos de confianza.
-                    form(action='/calcular-operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="10")
                         label(for="parametro_principal") Grados de libertad (df):
                         input(type="number", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese los grados de libertad (df), que representan el número de valores que son libres de variar en el cálculo de una estadística.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
                 // Slide F de Fisher-Snedecor
                 .slide#f-fisher
                     h2 Distribución F de Fisher-Snedecor
                     p La distribución F de Fisher-Snedecor se utiliza en análisis de varianza (ANOVA), en la comparación de dos muestras, y en la prueba de hipótesis sobre la igualdad de dos varianzas.
-                    form(action='/calcular-operacion', method='POST')
+                    form(action='/calcular-continua', method='POST')
+                        input(type="hidden", name="tipocalculo", value="11")
                         label(for="parametro_principal") Grados de libertad del numerador (df1):
                         input(type="number", id="parametro_principal", name="parametro_principal", required)
                         p Ingrese los grados de libertad del numerador (df1), que representan el número de valores que son libres de variar en el cálculo de una estadística para el numerador.
@@ -121,9 +109,6 @@ block content
                         input(type="number", id="parametro_secundario", name="parametro_secundario", required)
                         p Ingrese los grados de libertad del denominador (df2), que representan el número de valores que son libres de variar en el cálculo de una estadística para el denominador.
                         button(type="submit") Calcular
-                    button.export
-                        i.ri-file-pdf-line
-                        | Exportar a PDF
 
         // Script para cambiar de slide
     script.
@@ -138,5 +123,5 @@ block content
                 button.classList.add('active');
             });
         });
-        document.getElementById('normal').style.display = 'block'; // Mostrar la primera slide por defecto
-        document.querySelector('.slide-nav button[data-slide="normal"]').classList.add('active'); // Marcar el primer botón como activo
+        document.getElementById('normal').style.display = 'block'; // Establecemos la que se mostrara por defecto que es la del inicio, usaremos el orden dado.
+        document.querySelector('.slide-nav button[data-slide="normal"]').classList.add('active'); // también se muestra en cual estamos, el mismo que el de arriba se especifica

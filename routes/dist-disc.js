@@ -4,9 +4,9 @@ const router = express.Router();
 const authMiddleWare = require('../middleware/authMiddleware');
 const math = require('mathjs');
 
-//Exihibe la pagína al puerto destinado
+//Exihibe la pagína al puerto destinados
 router.get('/',authMiddleWare.authenticate, (req, res, next) => {
-    res.render('dist-disc', {title: 'Distribumaster',});
+    res.render('dist-disc', {title: 'Distribumaster', resultado: req.resultado });
     next()
 });
 

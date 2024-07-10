@@ -1,0 +1,206 @@
+extends layout
+
+block content
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Resultados de Distribuciones Continuas
+    link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+    link(rel="stylesheet", href="/css/resultados.css")
+    link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
+    script(src='https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/jspdf@2.3.1/dist/jspdf.umd.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js')
+
+  body
+    .container-resultados
+      .header
+      .results
+        if tipocalculo == '6'
+          h2 Distribución Normal
+          p Media (μ): #{parametro_principal}
+          p Desviación estándar (σ): #{parametro_secundario}
+          p Valor (x): #{parametro_terciario}
+          p Resultado: #{resultado}
+        else if tipocalculo == '7'
+          h2 Distribución Exponencial
+          p Tasa de éxito (λ): #{parametro_principal}
+          p Valor (x): #{parametro_secundario}
+          p Resultado: #{resultado}
+        else if tipocalculo == '8'
+          h2 Distribución Uniforme
+          p Valor mínimo (a): #{parametro_principal}
+          p Valor máximo (b): #{parametro_secundario}
+          p Valor (x): #{parametro_terciario}
+          p Resultado: #{resultado}
+        else if tipocalculo == '9'
+          h2 Distribución t de Student
+          p Grados de libertad (v): #{parametro_principal}
+          p Valor (t): #{parametro_secundario}
+          p Resultado: #{resultado}
+        else if tipocalculo == '10'
+          h2 Distribución Chi-cuadrado
+          p Grados de libertad (k): #{parametro_principal}
+          p Valor (x): #{parametro_secundario}
+          p Resultado: #{resultado}
+        else if tipocalculo == '11'
+          h2 Distribución F de Fisher-Snedecor
+          p Grados de libertad del numerador (d1): #{parametro_principal}
+          p Grados de libertad del denominador (d2): #{parametro_secundario}
+          p Valor (x): #{parametro_terciario}
+          p Resultado: #{resultado}
+
+      .chart-container
+        #chart(style="width: 100%; height: 400px;")
+
+      .buttons
+        a.btn(href='/dist-cont')
+          i.ri-arrow-left-line
+          |  Volver
+        button.export-btn(onclick='toggleExportOptions()')
+          i.ri-file-download-line
+          |  Exportar
+        .export-buttons.hidden
+          button.export-btn(onclick='exportToPDF()')
+            i.ri-file-pdf-line
+            |  PDF
+          button.export-btn(onclick='exportToPNG()')
+            i.ri-image-line
+            |  PNG
+          button.export-btn(onclick='exportToCSV()')
+            i.ri-file-excel-line
+            |  CSV
+
+  script.
+    document.addEventListener('DOMContentLoaded', function () {
+      var chart = echarts.init(document.getElementById('chart'));
+      var option;
+
+      switch(#{tipocalculo}) {
+        case 6:
+          option = {
+            title: { text: 'Distribución Normal' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 'x' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_terciario}, #{resultado}]] }]
+          };
+          break;
+        case 7:
+          option = {
+            title: { text: 'Distribución Exponencial' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 'x' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_secundario}, #{resultado}]] }]
+          };
+          break;
+        case 8:
+          option = {
+            title: { text: 'Distribución Uniforme' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 'x' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_terciario}, #{resultado}]] }]
+          };
+          break;
+        case 9:
+          option = {
+            title: { text: 'Distribución t de Student' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 't' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_secundario}, #{resultado}]] }]
+          };
+          break;
+        case 10:
+          option = {
+            title: { text: 'Distribución Chi-cuadrado' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 'x' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_secundario}, #{resultado}]] }]
+          };
+          break;
+        case 11:
+          option = {
+            title: { text: 'Distribución F de Fisher-Snedecor' },
+            tooltip: {},
+            xAxis: { type: 'value', name: 'x' },
+            yAxis: { type: 'value', name: 'Densidad' },
+            series: [{ type: 'line', data: [[#{parametro_terciario}, #{resultado}]] }]
+          };
+          break;
+      }
+      chart.setOption(option);
+
+      window.onresize = function () {
+        chart.resize();
+      };
+
+      window.exportToPDF = function () {
+        html2canvas(document.querySelector('.results'), {
+          scale: 2 // Aumentar la escala para una mejor resolución
+        }).then(canvas => {
+          var imgData = canvas.toDataURL('image/png');
+          var pdf = new jspdf.jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+          });
+
+          var pageWidth = pdf.internal.pageSize.getWidth();
+          var pageHeight = pdf.internal.pageSize.getHeight();
+          var imgWidth = canvas.width / 2; // Ajustar al mismo valor de la escala
+          var imgHeight = canvas.height / 2;
+
+          // Calcular la posición para centrar la imagen en el PDF
+          var x = (pageWidth - imgWidth) / 2;
+          var y = 20; // Márgenes superiores e inferiores
+
+          pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+
+          // Añadir la gráfica
+          html2canvas(document.getElementById('chart'), {
+            scale: 2
+          }).then(chartCanvas => {
+            var chartImgData = chartCanvas.toDataURL('image/png');
+            var chartX = (pageWidth - (chartCanvas.width / 2)) / 2;
+            var chartY = y + imgHeight + 10; // Espacio entre el texto y la gráfica
+
+            pdf.addPage();
+            pdf.addImage(chartImgData, 'PNG', chartX, chartY, chartCanvas.width / 2, chartCanvas.height / 2);
+
+            pdf.save('resultado.pdf');
+          });
+        });
+      }
+
+      window.exportToPNG = function () {
+        html2canvas(document.querySelector('.results')).then(canvas => {
+          canvas.toBlob(blob => {
+            saveAs(blob, 'resultado.png');
+          });
+        });
+      }
+
+      window.exportToCSV = function () {
+        var csvContent = 'data:text/csv;charset=utf-8,';
+        var datos = document.querySelector('.results').innerText;
+        csvContent += 'Datos de la Operación\n' + datos + '\n\n';
+        csvContent += 'Resultado de la Operación\n' + datos + '\n';
+
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'resultado.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      window.toggleExportOptions = function () {
+        document.querySelector('.export-buttons').classList.toggle('hidden');
+      }
+    });

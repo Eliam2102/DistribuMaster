@@ -47,14 +47,7 @@ block content
             p(style="font-size: 0.9em; color: #666;") Donde 𝑝 es la probabilidad de éxito en un solo ensayo.
             input(type="number", step="0.1", id="parametro_terciario", name="parametro_terciario", required)
             button(type="submit") Calcular
-          .result
-            h3 Resultado
-            p Aquí aparecerá el resultado del cálculo.
-            // Contenedor de la gráfica
-            #binomialChart(style="width: 600px; height: 400px;")
-          button.export
-            i.ri-file-pdf-line
-            | Exportar a PDF
+
 
         // Slide Poisson
         .slide#poisson
@@ -71,14 +64,7 @@ block content
             label(for="parametro_secundario") Número de ocurrencias (k):
             input(type="number", step="0.01", id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
-          .result
-            h3 Resultado
-            p Aquí aparecerá el resultado del cálculo.
-            // Contenedor de la gráfica
-            #poissonChart(style="width: 600px; height: 400px;")
-          button.export
-            i.ri-file-pdf-line
-            | Exportar a PDF
+          
 
         // Slide Geométrica
         .slide#geometrica
@@ -93,18 +79,11 @@ block content
             label(for="parametro_principal") Probabilidad de éxito (p):
             p(style="font-size: 0.9em; color: #666;") Donde (p) es la probabilidad de éxito, es decir un valor entre 0 y 1 que representa la probabilidad de obtener un éxito en un solo ensayo.
             input(type="number", step="0.01", id="parametro_principal", name="parametro_principal", required)
-            label(for="parametro_secundario") Probabilidad de éxito (K):
+            label(for="parametro_secundario") Número de ensayos (k):
             p(style="font-size: 0.9em; color: #666;") Donde (k) es la variable aleatoria que representa el número de ensayos necesarios para obtener el primer éxito.
             input(type="number", step="0.01", id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
-          .result
-            h3 Resultado
-            p Aquí aparecerá el resultado del cálculo.
-            // Contenedor de la gráfica
-            #geometricaChart(style="width: 600px; height: 400px;")
-          button.export
-            i.ri-file-pdf-line
-            | Exportar a PDF
+
 
         // Slide Hipergeométrica
         .slide#hipergeometrica
@@ -130,14 +109,7 @@ block content
             p(style="font-size: 0.9em; color: #666;") Ingrese el número de éxitos deseados en la muestra. Debe ser un número entero mayor que 0 y menor o igual al tamaño de la muestra.
             input(type="number", id="parametro_cuaternario", name="parametro_cuaternario", min="1", required)
             button(type="submit") Calcular
-          .result
-            h3 Resultado
-            p Aquí aparecerá el resultado del cálculo.
-            // Contenedor de la gráfica
-            #hipergeometricaChart(style="width: 600px; height: 400px;")
-          button.export
-            i.ri-file-pdf-line
-            | Exportar a PDF
+          
 
         // Slide Bernoulli
         .slide#bernoulli
@@ -158,14 +130,6 @@ block content
             p(style="font-size: 0.9em; color: #666;") Donde x es la variable aleatoria que toma valores binarios que indican el resultado de un único ensayo de Bernoulli.
             input(type="number", step="0.01", max="1",id="parametro_secundario", name="parametro_secundario", required)
             button(type="submit") Calcular
-          .result
-            h3 Resultado
-            p Aquí aparecerá el resultado del cálculo.
-            // Contenedor de la gráfica
-            #bernoulliChart(style="width: 600px; height: 400px;")
-          button.export
-            i.ri-file-pdf-line
-            | Exportar a PDF
 
     // Script para cambiar de slide
     script.
@@ -180,37 +144,5 @@ block content
           button.classList.add('active');
         });
       });
-      document.getElementById('binomial').style.display = 'block'; // Mostrar la primera slide por defecto
-      document.querySelector('.slide-nav button[data-slide="binomial"]').classList.add('active'); // Marcar el primer botón como activo
-
-    // Script para inicializar los gráficos con ECharts
-    script(src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js")
-    script.
-      // Función para inicializar una gráfica de ejemplo
-      function initChart(id, title, data) {
-        var chartDom = document.getElementById(id);
-        var myChart = echarts.init(chartDom);
-        var option = {
-          title: {
-            text: title
-          },
-          tooltip: {},
-          xAxis: {
-            data: ['A', 'B', 'C', 'D', 'E']
-          },
-          yAxis: {},
-          series: [{
-            name: 'Ejemplo',
-            type: 'bar',
-            data: data
-          }]
-        };
-        myChart.setOption(option);
-      }
-
-      // Inicializar gráficos de ejemplo en cada slide
-      initChart('binomialChart', 'Distribución Binomial', [5, 20, 36, 10, 10]);
-      initChart('poissonChart', 'Distribución Poisson', [15, 23, 43, 15, 13]);
-      initChart('geometricaChart', 'Distribución Geométrica', [10, 30, 40, 20, 15]);
-      initChart('hipergeometricaChart', 'Distribución Hipergeométrica', [12, 25, 30, 22, 18]);
-      initChart('bernoulliChart', 'Distribución Bernoulli', [7, 14, 27, 19, 22]);
+      document.getElementById('binomial').style.display = 'block'; // Mostrar la primera slide por defecto en la vista para evitar que se recargue
+      document.querySelector('.slide-nav button[data-slide="binomial"]').classList.add('active'); // Marcar el primer botón como activado que es la vista mencionada anteriormente

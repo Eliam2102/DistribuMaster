@@ -98,6 +98,7 @@ body {
     justify-content: center;
     margin-bottom: 10px;
     gap: 1.5px;
+    margin-top: 13pc;
   }
   .slide-nav button {
     width: 48%;

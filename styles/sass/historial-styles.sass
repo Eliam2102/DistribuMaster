@@ -1,0 +1,92 @@
+@use 'sass:math'
+
+// Variables
+$primary-color: #3498db
+$secondary-color: #2ecc71
+$font-family: 'Lato', sans-serif
+$font-size-base: 16px
+$background-color: #f9f9f9
+$table-header-bg: #2980b9
+$table-header-color: #fff
+$table-row-bg: #ecf0f1
+$table-row-hover-bg: #dcdde1
+$border-radius: 10px
+$spacing-unit: 1rem
+
+// Global styles
+body
+  font-family: $font-family
+  background-color: $background-color
+  color: #333
+  margin: 0
+  padding: $spacing-unit
+
+h1
+  text-align: center
+  margin-bottom: math.div($spacing-unit, 2) * 2
+  color: $primary-color
+
+// Table styles
+table
+  width: 100%
+  border-collapse: collapse
+  margin-bottom: math.div($spacing-unit, 2) * 2
+
+thead
+  background-color: $table-header-bg
+  color: $table-header-color
+
+th, td
+  padding: $spacing-unit
+  text-align: left
+  border-bottom: 1px solid $table-row-bg
+
+tbody
+  tr:nth-child(even)
+    background-color: $table-row-bg
+
+  tr:hover
+    background-color: $table-row-hover-bg
+
+// Responsive styles
+@media (max-width: 768px)
+  th, td
+    display: block
+    text-align: right
+    padding: math.div($spacing-unit, 2)
+    border: none
+
+  th
+    background-color: transparent
+    color: $primary-color
+
+  td::before
+    content: attr(data-label)
+    float: left
+    font-weight: bold
+    color: $secondary-color
+
+  tr
+    display: block
+    margin-bottom: $spacing-unit
+    border-bottom: 2px solid $primary-color
+    border-radius: $border-radius
+    overflow: hidden
+
+p
+  text-align: center
+  font-size: math.div($font-size-base, 2) * 0.875
+
+// Customizing buttons (if any)
+button
+  background-color: $primary-color
+  color: #fff
+  border: none
+  border-radius: $border-radius
+  padding: math.div($spacing-unit, 2) $spacing-unit
+  cursor: pointer
+  font-size: $font-size-base
+  transition: background-color 0.3s ease
+
+  &:hover
+    background-color: $secondary-color

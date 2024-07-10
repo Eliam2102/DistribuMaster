@@ -46,8 +46,8 @@ async function obtenerHistorial(UsuarioID, token) {
         }
     };
     try {
-        const response = await axios.post(`${process.env.BASE_URL}/calculo/historial/`, { UsuarioID }, axiosConfig);
-        return response.data.map(calculo => {
+        const response = await axios.post(`${process.env.BASE_URL}/calculo/historial`, { UsuarioID }, axiosConfig);
+        return response.data.map( calculo => {
             return new Calculos(
                 calculo.UsuarioID,
                 calculo.tipocalculo,

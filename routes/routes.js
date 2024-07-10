@@ -18,6 +18,7 @@ const calcularOperacion = require('./calcular-operacion');
 const calcularContinua = require('./calcular-continua');
 const resultadoDisc = require('./resultado-discretas');
 const resultadoCont = require('./resultado-continuas');
+const historial = require('./historial');
 
 //Configura las rutas
 router.use('/', index);
@@ -34,5 +35,6 @@ router.use('/calcular-operacion', calcularOperacion);
 router.use('/calcular-continua', calcularContinua);
 router.use('/resultado-discretas', resultadoDisc);
 router.use('/resultado-continuas', resultadoCont);
+router.use('/historial', historial);
 
 module.exports = router;

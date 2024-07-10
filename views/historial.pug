@@ -1,34 +1,44 @@
 extends layout
 
 block content
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Historial de Cálculos
-        link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
-        link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet")
-        link(rel="icon", type="image/png", href="/img/favicon-chart.png")
-        link(rel="stylesheet", href="/css/historial-styles.css")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Historial de Cálculos
+    link(href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css", rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap", rel="stylesheet")
+    link(rel="icon", type="image/png", href="/img/favicon-chart.png")
+    link(rel="stylesheet", href="/css/historial-styles.css")
 
-    body
-        .container
-        h1 Historial de Cálculos
-
-        .historial
-            each calculo in calculos
-            .card
-                .card-body
-                h2= calculo.tipo
-                p 
-                    strong Parámetros: 
-                    span= calculo.parametros
-                p 
-                    strong Resultado: 
-                    span= calculo.resultado
-                p 
-                    strong Fecha: 
-                    span= calculo.fecha
-
-        // Script para inicializar el historial
-    script.
-        // Aquí puedes añadir alguna funcionalidad con JavaScript si es necesario
+  body
+    .container
+      h1 Historial de Cálculos
+      if data && data.length
+        table
+          thead
+            tr
+              th Historial ID
+              th Usuario
+              th Email
+              th Tipo de Cálculo
+              th Parámetro Principal
+              th Parámetro Secundario
+              th Parámetro Terciario
+              th Parámetro Cuaternario
+              th Resultado
+              th Fecha de Cálculo
+          tbody
+            each item in data
+              tr
+                td= item.historial_id
+                td= item.usuario
+                td= item.email
+                td= item.tipo_calculo
+                td= item.parametro_principal
+                td= item.parametro_secundario
+                td= item.parametro_terciario
+                td= item.parametro_cuaternario
+                td= item.resultado
+                td= item.fecha_calculo
+      else
+        p No hay datos disponibles.

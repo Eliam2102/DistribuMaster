@@ -40,11 +40,9 @@ pug: "^3.0.3" - Motor de plantillas para Node.js.
 remixicon: "^4.2.0" - Biblioteca de iconos.
 sass: "^1.77.5" - Preprocesador CSS.
 session: "^0.1.0" - Middleware de sesión simple.
-Para instalar todas las dependencias, ejecuta:
-
-bash
-Copiar código
+Para instalar todas las dependencias, ejecuta el siguiente comando:
 npm install
+    
 Integración con API:
 Este proyecto web se integra con una API, que puedes encontrar en dsitribumaster_API. Asegúrate de que la API esté en funcionamiento y accesible.
 

@@ -1,0 +1,56 @@
+body
+  background-color: #ffffff
+  font-family: Arial, sans-serif
+  margin: 0
+  padding: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
+
+  .container
+    text-align: center
+
+    img
+      max-width: 80%
+      height: auto
+      display: block
+      margin: 0 auto
+
+    h1
+      font-size: 2rem
+      margin-top: 20px
+
+    p
+      font-size: 1rem
+      color: #666666
+      margin-top: 10px
+
+    .btn-home
+      margin-top: 20px
+      background-color: #3498db
+      color: #ffffff
+      border: none
+      padding: 10px 20px
+      border-radius: 5px
+      cursor: pointer
+      transition: background-color 0.3s ease
+
+      &:hover
+        background-color: #2980b9
+
+      svg
+        font-size: 1.5rem
+        margin-right: 5px
+
+  // Media queries para dispositivos móviles y desktops/laptops
+  @media only screen and (max-width: 768px)
+    .container
+      img
+        max-width: 100%
+
+      h1
+        font-size: 2rem
+
+      p
+        font-size: 1rem

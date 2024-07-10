@@ -1,0 +1,134 @@
+// Variables
+$primary-color: #3498db
+$secondary-color: #2ecc71
+$font-family: 'Lato', sans-serif
+
+// Reset general
+*,
+*::before,
+*::after
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+body
+  font-family: $font-family
+  line-height: 1.6
+  background-color: #f4f4f4
+  padding: 20px
+
+.container-acum
+  max-width: 1200px
+  margin: 0 auto
+  padding: 20px
+  background-color: #fff
+  border-radius: 10px
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+  border: 20px solid $primary-color
+
+.container-punt
+  max-width: 1200px
+  margin: 0 auto
+  padding: 20px
+  background-color: #fff
+  border-radius: 10px
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+  border: 20px solid $primary-color
+
+  @media (max-width: 768px)
+    padding: 10px
+    border: 10px solid $primary-color
+
+.header
+  text-align: center
+  margin-bottom: 20px
+
+h1
+  font-size: 2rem
+  color: $primary-color
+
+form
+  display: flex
+  flex-direction: column
+
+label
+  margin-bottom: 10px
+  font-weight: bold
+  font-style: italic
+
+input[type="number"]
+  padding: 10px
+  margin-bottom: 20px
+  border: 1px solid #ddd
+  border-radius: 5px
+
+button
+  padding: 10px 20px
+  background-color: $secondary-color
+  color: #fff
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  font-size: 1rem
+  font-weight: bold
+  font-style: italic
+
+  &:hover
+    background-color: darken($secondary-color, 10%)
+
+.export-buttons
+  display: flex
+  justify-content: center
+  margin-top: 20px
+
+.export-button
+  padding: 10px 20px
+  margin: 0 5px
+  background-color: $primary-color
+  color: #fff
+  border: none
+  border-radius: 5px
+  cursor: pointer
+  font-size: 1rem
+  font-weight: bold
+  font-style: italic
+
+  &:hover
+    background-color: darken($primary-color, 10%)
+
+.chart-container
+  margin-top: 20px
+
+@media (max-width: 1024px)
+  .container
+    max-width: 90%
+  
+  h1
+    font-size: 1.5rem
+
+  button, .export-button
+    font-size: 0.9rem
+    padding: 8px 16px
+
+@media (max-width: 768px)
+  .container
+    max-width: 100%
+
+  h1
+    font-size: 1.25rem
+
+  button, .export-button
+    font-size: 0.8rem
+    padding: 6px 12px
+
+@media (max-width: 480px)
+  .container
+    max-width: 100%
+    padding: 10px
+
+  h1
+    font-size: 1rem
+
+  button, .export-button
+    font-size: 0.75rem
+    padding: 5px 10px

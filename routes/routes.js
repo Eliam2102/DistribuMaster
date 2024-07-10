@@ -18,7 +18,10 @@ const calcularOperacion = require('./calcular-operacion');
 const calcularContinua = require('./calcular-continua');
 const resultadoDisc = require('./resultado-discretas');
 const resultadoCont = require('./resultado-continuas');
+const resultadoPunt = require('./resultado-acum');
+const resultadoAcum = require('./resultado-punt');
 const historial = require('./historial');
+const page404 = require ('./page404')
 
 //Configura las rutas
 router.use('/', index);
@@ -36,5 +39,8 @@ router.use('/calcular-continua', calcularContinua);
 router.use('/resultado-discretas', resultadoDisc);
 router.use('/resultado-continuas', resultadoCont);
 router.use('/historial', historial);
+router.use('/page404', page404);
+router.use('/resultado-acum', resultadoAcum);
+router.use('/resultado-punt', resultadoPunt);
 
 module.exports = router;

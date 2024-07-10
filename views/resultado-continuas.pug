@@ -23,36 +23,40 @@ block content
           p Desviación estándar (σ): #{parametro_secundario}
           p Valor (x): #{parametro_terciario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
         else if tipocalculo == '7'
           h2 Distribución Exponencial
           p Tasa de éxito (λ): #{parametro_principal}
           p Valor (x): #{parametro_secundario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
         else if tipocalculo == '8'
           h2 Distribución Uniforme
           p Valor mínimo (a): #{parametro_principal}
           p Valor máximo (b): #{parametro_secundario}
           p Valor (x): #{parametro_terciario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
         else if tipocalculo == '9'
           h2 Distribución t de Student
           p Grados de libertad (v): #{parametro_principal}
           p Valor (t): #{parametro_secundario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
         else if tipocalculo == '10'
           h2 Distribución Chi-cuadrado
           p Grados de libertad (k): #{parametro_principal}
           p Valor (x): #{parametro_secundario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
         else if tipocalculo == '11'
           h2 Distribución F de Fisher-Snedecor
           p Grados de libertad del numerador (d1): #{parametro_principal}
           p Grados de libertad del denominador (d2): #{parametro_secundario}
           p Valor (x): #{parametro_terciario}
           p Resultado: #{resultado}
+          #chart(style="width: 500px; height: 400px;")
 
-      .chart-container
-        #chart(style="width: 100%; height: 400px;")
 
       .buttons
         a.btn(href='/dist-cont')

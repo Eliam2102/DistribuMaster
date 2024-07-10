@@ -10,41 +10,132 @@ block content
         link(rel="icon", type="image/png", href="/img/favicon-chart.png")
         link(rel="stylesheet", href="/css/distribuciones-styles.css")
     body
-        .container-resultados-dist
-            // Barra de navegación para cambiar de slide
+        .container
             .slide-nav
-                h1 Calcular probabilidad de Intervalo
-
-            // Contenedor de las slides
+                h1 Calcula la Probabilidad de Intervalo
             .slides
-                // Slide Probabilidad de Intervalo
                 .slide#intervalo
                     h2 Probabilidad de Intervalo
-                    p Calcular la probabilidad de que una variable aleatoria se encuentre dentro de un rango específico.
-                    form
-                        label(for="limite-inferior") Límite inferior:
-                        input(type="number" id="limite-inferior" name="limite-inferior" required)
-                        label(for="limite-superior") Límite superior:
-                        input(type="number" id="limite-superior" name="limite-superior" required)
+                    p Calcular la probabilidad de que una variable aleatoria esté dentro de un intervalo específico.
+                    form#intervalo-form
+                        label(for="distribucion") Tipo de Distribución:
+                        select#distribucion(name="distribucion" required)
+                            option(value="") Selecciona una distribución
+                            option(value="binomial") Binomial
+                            option(value="poisson") Poisson
+                            option(value="geometrica") Geométrica
+                            option(value="hipergeometrica") Hipergeométrica
+                            option(value="bernoulli") Bernoulli
+                            option(value="normal") Normal
+                            option(value="exponencial") Exponencial
+                            option(value="uniforme") Uniforme
+                            option(value="t-student") T-Student
+                            option(value="chi-cuadrado") Chi-Cuadrado
+                            option(value="fisher-snedecor") Fisher-Snedecor
+                        .dynamic-fields
                         button(type="submit") Calcular
                     button.export
                         i.ri-file-pdf-line
                         | Exportar a PDF
-        
-        
 
-        // Script para cambiar de slide
-    script.
-        document.querySelectorAll('.slide-nav button').forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.slide').forEach(slide => {
-                    slide.style.display = 'none';
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js")
+        script.
+            $(document).ready(function() {
+                $('#distribucion').change(function() {
+                    var distribucion = $(this).val();
+                    var fields = '';
+                    
+                    if (distribucion === 'binomial') {
+                        fields += '<label for="n">Número de ensayos (n):</label>';
+                        fields += '<input type="number" id="n" name="n" required>';
+                        fields += '<label for="p">Probabilidad de éxito (p):</label>';
+                        fields += '<input type="number" id="p" name="p" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'poisson') {
+                        fields += '<label for="lambda">Lambda (λ):</label>';
+                        fields += '<input type="number" id="lambda" name="lambda" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'geometrica') {
+                        fields += '<label for="p">Probabilidad de éxito (p):</label>';
+                        fields += '<input type="number" id="p" name="p" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'hipergeometrica') {
+                        fields += '<label for="N">Tamaño de la población (N):</label>';
+                        fields += '<input type="number" id="N" name="N" required>';
+                        fields += '<label for="K">Número de éxitos en la población (K):</label>';
+                        fields += '<input type="number" id="K" name="K" required>';
+                        fields += '<label for="n">Número de ensayos (n):</label>';
+                        fields += '<input type="number" id="n" name="n" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'bernoulli') {
+                        fields += '<label for="p">Probabilidad de éxito (p):</label>';
+                        fields += '<input type="number" id="p" name="p" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'normal') {
+                        fields += '<label for="media">Media:</label>';
+                        fields += '<input type="number" id="media" name="media" required>';
+                        fields += '<label for="desviacion">Desviación Estándar:</label>';
+                        fields += '<input type="number" id="desviacion" name="desviacion" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'exponencial') {
+                        fields += '<label for="lambda">Lambda (λ):</label>';
+                        fields += '<input type="number" id="lambda" name="lambda" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'uniforme') {
+                        fields += '<label for="minimo">Mínimo:</label>';
+                        fields += '<input type="number" id="minimo" name="minimo" required>';
+                        fields += '<label for="maximo">Máximo:</label>';
+                        fields += '<input type="number" id="maximo" name="maximo" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 't-student') {
+                        fields += '<label for="grados-libertad">Grados de Libertad:</label>';
+                        fields += '<input type="number" id="grados-libertad" name="grados-libertad" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'chi-cuadrado') {
+                        fields += '<label for="grados-libertad">Grados de Libertad:</label>';
+                        fields += '<input type="number" id="grados-libertad" name="grados-libertad" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    } else if (distribucion === 'fisher-snedecor') {
+                        fields += '<label for="grados-libertad1">Grados de Libertad 1:</label>';
+                        fields += '<input type="number" id="grados-libertad1" name="grados-libertad1" required>';
+                        fields += '<label for="grados-libertad2">Grados de Libertad 2:</label>';
+                        fields += '<input type="number" id="grados-libertad2" name="grados-libertad2" required>';
+                        fields += '<label for="x1">Límite inferior (x1):</label>';
+                        fields += '<input type="number" id="x1" name="x1" required>';
+                        fields += '<label for="x2">Límite superior (x2):</label>';
+                        fields += '<input type="number" id="x2" name="x2" required>';
+                    }
+
+                    $('.dynamic-fields').html(fields);
                 });
-                document.getElementById(button.getAttribute('data-slide')).style.display = 'block';
-            // Añadir y quitar la clase active para el botón seleccionado
-                document.querySelectorAll('.slide-nav button').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
             });
-        });
-        document.getElementById('intervalo').style.display = 'block'; // Mostrar la primera slide por defecto
-        document.querySelector('.slide-nav button[data-slide="intervalo"]').classList.add('active'); // Marcar el primer botón como activo

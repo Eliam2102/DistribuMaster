@@ -8,12 +8,14 @@
     "forms": "sass styles/sass/forms.sass:public/css/forms.css",
     "index": "sass styles/sass/index.sass:public/css/index.css",
     "layout": "sass styles/sass/layout.sass:public/css/layout.css",
+    "404": "sass styles/sass/404.sass:public/css/404.css",
+    "probs": "sass styles/sass/probs.sass:public/css/probs.css",
     "historial-styles": "sass styles/sass/historial-styles.sass:public/css/historial-styles.css",
     "resultados": "sass styles/sass/resultados.sass:public/css/resultados.css",
     "distribuciones-style": "sass styles/sass/distribuciones-style.sass:public/css/distribuciones-style.css",
     "distribuciones-styles": "sass styles/sass/distribuciones-styles.sass:public/css/distribuciones-styles.css",
     "sass-watch": "sass --watch styles/sass:public/css",
-    "start": "npm run sass && npm run index && npm run resultados && npm run historial-styles && npm run distribuciones-style && npm run distribuciones-styles && npm run layout && npm run forms && node server.js"
+    "start": "npm run sass && npm run index && npm run probs && npm run 404 && npm run resultados && npm run historial-styles && npm run distribuciones-style && npm run distribuciones-styles && npm run layout && npm run forms && node server.js"
   },
   "keywords": [],
   "author": "Eliam Jesus Cauich Villanueva",

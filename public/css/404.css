@@ -12,20 +12,23 @@ body .container {
   text-align: center;
 }
 body .container img {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
+  display: block;
+  margin: 0 auto;
+  width: 500px;
 }
 body .container h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-top: 20px;
 }
 body .container p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #666666;
   margin-top: 10px;
 }
-body .container .btn-home {
-  margin-top: 20px;
+body .container .btn-home-404 {
+  margin-top: 35px;
   background-color: #3498db;
   color: #ffffff;
   border: none;
@@ -34,15 +37,17 @@ body .container .btn-home {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-body .container .btn-home:hover {
+body .container .btn-home-404:hover {
   background-color: #2980b9;
 }
-body .container .btn-home svg {
+body .container .btn-home-404 svg {
   font-size: 1.5rem;
   margin-right: 5px;
 }
-
 @media only screen and (max-width: 768px) {
+  body .container img {
+    max-width: 100%;
+  }
   body .container h1 {
     font-size: 2rem;
   }
